@@ -13,6 +13,10 @@ importers:
         version: 0.50.0
 
   contracts:
+    dependencies:
+      '@pythnetwork/pyth-sdk-solidity':
+        specifier: ^4.2.0
+        version: 4.2.0
     devDependencies:
       '@nomicfoundation/hardhat-chai-matchers':
         specifier: ^1.0.0
@@ -476,7 +480,7 @@ packages:
       '@babel/traverse': 7.24.5
       '@babel/types': 7.24.5
       convert-source-map: 2.0.0
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.4.1(supports-color@8.1.1)
       gensync: 1.0.0-beta.2
       json5: 2.2.3
       semver: 6.3.1
@@ -5599,6 +5603,10 @@ packages:
 
   /@polka/url@1.0.0-next.29:
     resolution: {integrity: sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww==}
+    dev: false
+
+  /@pythnetwork/pyth-sdk-solidity@4.2.0:
+    resolution: {integrity: sha512-IO4pRqloqEXdbWqFbiNqthpaA5Dktl+t5GXckwdReEti90H4zcgxvINFLrSfRp7ylN2cP/LVgoCRHGEJGYlwKg==}
     dev: false
 
   /@react-spring/animated@10.0.1(react@19.1.0):

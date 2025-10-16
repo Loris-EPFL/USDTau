@@ -10,31 +10,30 @@ import "../Dependencies/LiquityMath.sol";
 // import "forge-std/console2.sol";
 
 contract PythVTAOPriceFeed is PythCompositePriceFeed, IVTAOPriceFeed {
-    Oracle public vTaoUsdOracleData;
+    AggregatorV3Interface public vTaoUsdAggregator;
+    uint256 public vTaoUsdStalenessThreshold;
+    uint8 public vTaoUsdDecimals;
 
     uint256 public constant VTAO_USD_DEVIATION_THRESHOLD = 1e16; // 1%
 
     constructor(
-        address _pythContractAddress,
-        bytes32 _taoUsdPriceId,
-        bytes32 _vTaoUsdPriceId,
+        address _taoUsdAggregator,
+        address _vTaoUsdAggregator,
         address _vTaoTokenAddress,
         uint256 _taoUsdStalenessThreshold,
         uint256 _vTaoUsdStalenessThreshold,
         address _borrowerOperationsAddress
     )
         PythCompositePriceFeed(
-            _pythContractAddress,
-            _taoUsdPriceId,
+            _taoUsdAggregator,
             _vTaoTokenAddress,
             _taoUsdStalenessThreshold,
             _borrowerOperationsAddress
         )
     {
-        vTaoUsdOracleData.pythContract = IPythOracle(_pythContractAddress);
-        vTaoUsdOracleData.priceId = _vTaoUsdPriceId;
-        vTaoUsdOracleData.stalenessThreshold = _vTaoUsdStalenessThreshold;
-        vTaoUsdOracleData.decimals = 8; // Pyth prices are typically 8 decimals
+        vTaoUsdAggregator = AggregatorV3Interface(_vTaoUsdAggregator);
+        vTaoUsdStalenessThreshold = _vTaoUsdStalenessThreshold;
+        vTaoUsdDecimals = vTaoUsdAggregator.decimals();
 
         _fetchPricePrimary(false);
 
@@ -44,26 +43,34 @@ contract PythVTAOPriceFeed is PythCompositePriceFeed, IVTAOPriceFeed {
 
     // Compatibility function for the interface
     function ethUsdOracle() external view override returns (AggregatorV3Interface, uint256, uint8) {
-        // Return a dummy AggregatorV3Interface (address(0)), staleness threshold, and decimals
-        return (AggregatorV3Interface(address(0)), taoUsdOracleData.stalenessThreshold, taoUsdOracleData.decimals);
+        // Return the TAO/USD oracle (since we're using TAO as the base), staleness threshold, and decimals
+        return (taoUsdOracleData.aggregator, taoUsdOracleData.stalenessThreshold, taoUsdOracleData.decimals);
     }
 
     // Compatibility function for the interface
     function taoUsdOracle() external view override returns (AggregatorV3Interface, uint256, uint8) {
-        // Return a dummy AggregatorV3Interface (address(0)), staleness threshold, and decimals
-        return (AggregatorV3Interface(address(0)), taoUsdOracleData.stalenessThreshold, taoUsdOracleData.decimals);
+        // Return the TAO/USD oracle, staleness threshold, and decimals
+        return (taoUsdOracleData.aggregator, taoUsdOracleData.stalenessThreshold, taoUsdOracleData.decimals);
     }
 
     // Compatibility function for the IVTAOPriceFeed interface
     function vTaoUsdOracle() external view override returns (AggregatorV3Interface, uint256, uint8) {
-        // Return a dummy AggregatorV3Interface (address(0)), staleness threshold, and decimals
-        return (AggregatorV3Interface(address(0)), vTaoUsdOracleData.stalenessThreshold, vTaoUsdOracleData.decimals);
+        // Return the vTAO/USD oracle, staleness threshold, and decimals
+        return (vTaoUsdAggregator, vTaoUsdStalenessThreshold, vTaoUsdDecimals);
     }
 
     function _fetchPricePrimary(bool _isRedemption) internal override returns (uint256, bool) {
         assert(priceSource == PriceSource.primary);
-        (uint256 vTaoUsdPrice, bool vTaoUsdOracleDown) = _getOracleAnswer(vTaoUsdOracleData);
+        
+        // Get vTAO-USD price
+        ChainlinkResponse memory vTaoUsdResponse = _getCurrentChainlinkResponse(vTaoUsdAggregator);
+        bool vTaoUsdOracleDown = !_isValidChainlinkPrice(vTaoUsdResponse, vTaoUsdStalenessThreshold);
+        uint256 vTaoUsdPrice = _scaleChainlinkPriceTo18decimals(vTaoUsdResponse.answer, vTaoUsdDecimals);
+        
+        // Get canonical exchange rate
         (uint256 taoPerVTao, bool exchangeRateIsDown) = _getCanonicalRate();
+        
+        // Get TAO-USD price
         (uint256 taoUsdPrice, bool taoUsdOracleDown) = _getOracleAnswer(taoUsdOracleData);
 
         // - If exchange rate or TAO-USD is down, shut down and switch to last good price. Reasoning:
@@ -73,12 +80,12 @@ contract PythVTAOPriceFeed is PythCompositePriceFeed, IVTAOPriceFeed {
             return (_shutDownAndSwitchToLastGoodPrice(rateProviderAddress), true);
         }
         if (taoUsdOracleDown) {
-            return (_shutDownAndSwitchToLastGoodPrice(address(taoUsdOracleData.pythContract)), true);
+            return (_shutDownAndSwitchToLastGoodPrice(address(taoUsdOracleData.aggregator)), true);
         }
 
         // If the vTAO-USD feed is down, shut down and try to substitute it with the TAO-USD price
         if (vTaoUsdOracleDown) {
-            return (_shutDownAndSwitchToETHUSDxCanonical(address(vTaoUsdOracleData.pythContract), taoUsdPrice), true);
+            return (_shutDownAndSwitchToETHUSDxCanonical(address(vTaoUsdAggregator), taoUsdPrice), true);
         }
 
         // Otherwise, use the primary price calculation:

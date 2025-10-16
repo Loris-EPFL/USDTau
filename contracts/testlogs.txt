@@ -1,0 +1,10 @@
+Compiler run failed:
+Warning (3420): Source file does not specify required compiler version! Consider adding "pragma solidity ^0.8.24;"
+--> src/Tokens/vTAO.sol
+
+Error (7576): Undeclared identifier. "deployAndConnectContractsMainnet" is not (or not yet) visible at this point.
+   --> test/TestContracts/PythDeployment.t.sol:665:42:
+    |
+665 |         DeploymentResult memory result = deployAndConnectContractsMainnet(troveManagerParamsArray);
+    |                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+

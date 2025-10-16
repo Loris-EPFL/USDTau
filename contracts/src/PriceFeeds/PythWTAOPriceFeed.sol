@@ -1,35 +1,35 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.24;
+pragma solidity ^0.8.0;
 
 import "./PythPriceFeedBase.sol";
 import "../Interfaces/ITAOPriceFeed.sol";
 
-// import "forge-std/console2.sol";
-
+/*
+ * PriceFeed for WTAO token.
+ * Fetches the price of TAO in USD.
+ */
 contract PythWTAOPriceFeed is PythPriceFeedBase, ITAOPriceFeed {
     constructor(
-        address _pythContractAddress,
-        bytes32 _taoUsdPriceId,
+        address _taoUsdAggregator,
         uint256 _taoUsdStalenessThreshold,
-        address _borrowerOperationsAddress
-    ) PythPriceFeedBase(_pythContractAddress, _taoUsdPriceId, _taoUsdStalenessThreshold, _borrowerOperationsAddress) {
+        address _borrowOperationsAddress
+    ) PythPriceFeedBase(_taoUsdAggregator, _taoUsdStalenessThreshold, _borrowOperationsAddress) {
+        // Fetch the price to ensure the oracle is working
         _fetchPricePrimary();
-
-        // Check the oracle didn't already fail
         assert(priceSource == PriceSource.primary);
     }
 
     // Compatibility function for the interface
     function ethUsdOracle() external view override returns (AggregatorV3Interface, uint256, uint8) {
-        // Return a dummy AggregatorV3Interface (address(0)), staleness threshold, and decimals
-        return (AggregatorV3Interface(address(0)), taoUsdOracleData.stalenessThreshold, taoUsdOracleData.decimals);
+        // Return the TAO/USD oracle (since we're using TAO as the base), staleness threshold, and decimals
+        return (taoUsdOracleData.aggregator, taoUsdOracleData.stalenessThreshold, taoUsdOracleData.decimals);
     }
 
     // Compatibility function for the interface
-    function taoUsdOracle() external view override returns (AggregatorV3Interface, uint256, uint8) {
-        // Return a dummy AggregatorV3Interface (address(0)), staleness threshold, and decimals
-        return (AggregatorV3Interface(address(0)), taoUsdOracleData.stalenessThreshold, taoUsdOracleData.decimals);
+    function taoUsdOracle() external view override(ITAOPriceFeed) returns (AggregatorV3Interface, uint256, uint8) {
+        // Return the TAO/USD oracle, staleness threshold, and decimals
+        return (taoUsdOracleData.aggregator, taoUsdOracleData.stalenessThreshold, taoUsdOracleData.decimals);
     }
 
     function fetchPrice() public returns (uint256, bool) {
@@ -53,8 +53,8 @@ contract PythWTAOPriceFeed is PythPriceFeedBase, ITAOPriceFeed {
         assert(priceSource == PriceSource.primary);
         (uint256 taoUsdPrice, bool taoUsdOracleDown) = _getOracleAnswer(taoUsdOracleData);
 
-        // If the TAO-USD Pyth response was invalid in this transaction, return the last good TAO-USD price calculated
-        if (taoUsdOracleDown) return (_shutDownAndSwitchToLastGoodPrice(address(taoUsdOracleData.pythContract)), true);
+        // If the TAO-USD oracle response was invalid in this transaction, return the last good TAO-USD price calculated
+        if (taoUsdOracleDown) return (_shutDownAndSwitchToLastGoodPrice(address(taoUsdOracleData.aggregator)), true);
 
         lastGoodPrice = taoUsdPrice;
         return (taoUsdPrice, false);

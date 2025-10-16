@@ -13,12 +13,11 @@ abstract contract PythCompositePriceFeed is PythPriceFeedBase {
     address public rateProviderAddress;
 
     constructor(
-        address _pythContractAddress,
-        bytes32 _taoUsdPriceId,
+        address _taoUsdAggregator,
         address _rateProviderAddress,
         uint256 _taoUsdStalenessThreshold,
         address _borrowerOperationsAddress
-    ) PythPriceFeedBase(_pythContractAddress, _taoUsdPriceId, _taoUsdStalenessThreshold, _borrowerOperationsAddress) {
+    ) PythPriceFeedBase(_taoUsdAggregator, _taoUsdStalenessThreshold, _borrowerOperationsAddress) {
         // Store rate provider
         rateProviderAddress = _rateProviderAddress;
     }

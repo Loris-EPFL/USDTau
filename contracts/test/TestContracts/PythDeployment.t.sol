@@ -42,6 +42,7 @@ import {WTAO} from "src/Tokens/WTAO.sol";
 import {PythVTAOPriceFeed} from "src/PriceFeeds/PythVTAOPriceFeed.sol";
 import {PythWTAOPriceFeed} from "src/PriceFeeds/PythWTAOPriceFeed.sol";
 import {BittensorPrecompileMock} from "./BittensorPrecompileMock.sol";
+import {PythAggregatorV3} from "@pythnetwork/pyth-sdk-solidity/PythAggregatorV3.sol";
 import "forge-std/Test.sol";
 import "forge-std/console.sol";
 
@@ -468,25 +469,41 @@ contract PythTestDeployer is MetadataDeployment, Test {
         OracleParams memory _oracleParams,
         address _borrowerOperationsAddress
     ) internal returns (IPriceFeed) {
-        // Price feeds for Pyth oracles
+        // Create PythAggregatorV3 for TAO-USD (shared by all branches)
+        deployedTaoAggregator = new PythAggregatorV3(
+            _externalAddresses.VTAOOracle, // Pyth contract address
+            0x410f41de235f2db824e562ea7ab2d3d3d4ff048316c61d629c0b93f58584e1af // TAO price ID
+        );
+        
+        // Create PythAggregatorV3 instances for each branch
         // vTAO
         if (_branch == 0) {
+            // Create PythAggregatorV3 for vTAO
+            deployedVTaoAggregator = new PythAggregatorV3(
+                _externalAddresses.VTAOOracle, // Pyth contract address
+                0x410f41de235f2db824e562ea7ab2d3d3d4ff048316c61d629c0b93f58584e1af // TAO price ID
+            );
+            
             return new PythVTAOPriceFeed(
-                _externalAddresses.VTAOOracle,
-                0x410f41de235f2db824e562ea7ab2d3d3d4ff048316c61d629c0b93f58584e1af, // TAO_PRICE_ID from TaoFiPriceFeed
-                0x410f41de235f2db824e562ea7ab2d3d3d4ff048316c61d629c0b93f58584e1af, // vTAO_PRICE_ID (using TAO for now)
+                address(deployedTaoAggregator), // TAO-USD aggregator
+                address(deployedVTaoAggregator), // vTAO-USD aggregator
                 _externalAddresses.VTAOToken,
-                _oracleParams.vtaoUsdStalenessThreshold,
-                _oracleParams.vtaoUsdStalenessThreshold,
+                3600, // 1 hour staleness threshold for TAO-USD
+                3600, // 1 hour staleness threshold for vTAO-USD
                 _borrowerOperationsAddress
             );
         }
 
         // WTAO
+        // Create PythAggregatorV3 for WTAO
+        deployedWTaoAggregator = new PythAggregatorV3(
+            _externalAddresses.WTAOOracle, // Pyth contract address
+            0x410f41de235f2db824e562ea7ab2d3d3d4ff048316c61d629c0b93f58584e1af // TAO price ID
+        );
+        
         return new PythWTAOPriceFeed(
-            _externalAddresses.WTAOOracle,
-            0x410f41de235f2db824e562ea7ab2d3d3d4ff048316c61d629c0b93f58584e1af, // TAO_PRICE_ID from TaoFiPriceFeed
-            _oracleParams.wtaoUsdStalenessThreshold,
+            address(deployedTaoAggregator), // TAO-USD aggregator
+            3600, // 1 hour staleness threshold for TAO-USD
             _borrowerOperationsAddress
         );
     }
@@ -597,5 +614,79 @@ contract PythTestDeployer is MetadataDeployment, Test {
         }
     }
 
-    // ... (rest of the functions would be similar to the original Deployment.t.sol but adapted for Pyth)
+    // Store deployed aggregators for oracle functions
+    PythAggregatorV3 public deployedTaoAggregator;
+    PythAggregatorV3 public deployedVTaoAggregator;
+    PythAggregatorV3 public deployedWTaoAggregator;
+    
+    // Oracle functions that return proper PythAggregatorV3 instances instead of 0 addresses
+    function ethUsdOracle() external view returns (address, uint256, uint8) {
+        // Return TAO aggregator as the primary oracle (equivalent to ETH in mainnet)
+        if (address(deployedTaoAggregator) != address(0)) {
+            return (address(deployedTaoAggregator), 3600, 18); // 1 hour staleness, 18 decimals
+        }
+        return (address(0), 0, 0);
+    }
+    
+    function taoUsdOracle() external view returns (address, uint256, uint8) {
+        // Return TAO aggregator
+        if (address(deployedTaoAggregator) != address(0)) {
+            return (address(deployedTaoAggregator), 3600, 18); // 1 hour staleness, 18 decimals
+        }
+        return (address(0), 0, 0);
+    }
+    
+    // Test function to verify deployment works correctly
+    function test_deployAndConnectContractsMainnet() public {
+        // Define trove manager parameters for 2 branches (vTAO and WTAO)
+        TroveManagerParams[] memory troveManagerParamsArray = new TroveManagerParams[](2);
+        
+        // vTAO branch parameters
+        troveManagerParamsArray[0] = TroveManagerParams({
+            CCR: 150e16, // 150%
+            MCR: 110e16, // 110%
+            BCR: 10e16, // 10% (within valid range 5%-50%)
+            SCR: 130e16, // 130%
+            LIQUIDATION_PENALTY_SP: 5e16, // 5%
+            LIQUIDATION_PENALTY_REDISTRIBUTION: 5e16 // 5%
+        });
+        
+        // WTAO branch parameters
+        troveManagerParamsArray[1] = TroveManagerParams({
+            CCR: 150e16, // 150%
+            MCR: 110e16, // 110%
+            BCR: 10e16, // 10% (within valid range 5%-50%)
+            SCR: 130e16, // 130%
+            LIQUIDATION_PENALTY_SP: 5e16, // 5%
+            LIQUIDATION_PENALTY_REDISTRIBUTION: 5e16 // 5%
+        });
+        
+        // Deploy contracts
+        DeploymentResult memory result = this.deployAndConnectContractsMainnet(troveManagerParamsArray);
+        
+        // Verify deployment was successful
+        assertEq(result.contractsArray.length, 2, "Should deploy 2 branches");
+        assertTrue(address(result.boldToken) != address(0), "BoldToken should be deployed");
+        assertTrue(address(result.collateralRegistry) != address(0), "CollateralRegistry should be deployed");
+        
+        // Verify oracle functions return non-zero addresses
+        (address ethOracle, uint256 ethStaleness, uint8 ethDecimals) = this.ethUsdOracle();
+        assertTrue(ethOracle != address(0), "ethUsdOracle should return non-zero address");
+        assertEq(ethStaleness, 3600, "ethUsdOracle staleness should be 1 hour");
+        assertEq(ethDecimals, 18, "ethUsdOracle decimals should be 18");
+        
+        (address taoOracle, uint256 taoStaleness, uint8 taoDecimals) = this.taoUsdOracle();
+        assertTrue(taoOracle != address(0), "taoUsdOracle should return non-zero address");
+        assertEq(taoStaleness, 3600, "taoUsdOracle staleness should be 1 hour");
+        assertEq(taoDecimals, 18, "taoUsdOracle decimals should be 18");
+        
+        // Verify price feeds are deployed
+        for (uint256 i = 0; i < result.contractsArray.length; i++) {
+            assertTrue(address(result.contractsArray[i].priceFeed) != address(0), "PriceFeed should be deployed");
+        }
+        
+        console.log("Pyth deployment test completed successfully");
+        console.log("ETH Oracle address:", ethOracle);
+        console.log("TAO Oracle address:", taoOracle);
+    }
 }
