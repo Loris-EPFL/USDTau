@@ -5,23 +5,9 @@ pragma solidity 0.8.24;
 import "../Dependencies/AggregatorV3Interface.sol";
 import "../Interfaces/IMainnetPriceFeed.sol";
 import "../BorrowerOperations.sol";
+import "../Tokens/IPythOracle.sol";
 
 // import "forge-std/console2.sol";
-
-interface IPyth {
-    struct Price {
-        // Price
-        int64 price;
-        // Confidence interval around the price
-        uint64 conf;
-        // Price exponent
-        int32 expo;
-        // Unix timestamp describing when the price was published
-        uint publishTime;
-    }
-
-    function getPriceUnsafe(bytes32 id) external view returns (Price memory price);
-}
 
 abstract contract PythPriceFeedBase is IMainnetPriceFeed {
     // Determines where the PriceFeed sources data from. Possible states:
@@ -34,7 +20,7 @@ abstract contract PythPriceFeedBase is IMainnetPriceFeed {
     uint256 public lastGoodPrice;
 
     struct Oracle {
-        IPyth pythContract;
+        IPythOracle pythContract;
         bytes32 priceId;
         uint256 stalenessThreshold;
         uint8 decimals;
@@ -61,12 +47,12 @@ abstract contract PythPriceFeedBase is IMainnetPriceFeed {
         address _borrowOperationsAddress
     ) {
         // Store TAO-USD oracle
-        taoUsdOracleData.pythContract = IPyth(_pythContractAddress);
+        taoUsdOracleData.pythContract = IPythOracle(_pythContractAddress);
         taoUsdOracleData.priceId = _taoUsdPriceId;
         taoUsdOracleData.stalenessThreshold = _taoUsdStalenessThreshold;
         
         // Get decimals from Pyth price feed
-        IPyth.Price memory priceData = taoUsdOracleData.pythContract.getPriceUnsafe(_taoUsdPriceId);
+        PythStructs.Price memory priceData = taoUsdOracleData.pythContract.getPriceUnsafe(_taoUsdPriceId);
         taoUsdOracleData.decimals = uint8(uint32(-priceData.expo));
 
         borrowerOperations = IBorrowerOperations(_borrowOperationsAddress);
@@ -100,7 +86,7 @@ abstract contract PythPriceFeedBase is IMainnetPriceFeed {
         return lastGoodPrice;
     }
 
-    function _getCurrentPythResponse(IPyth _pythContract, bytes32 _priceId)
+    function _getCurrentPythResponse(IPythOracle _pythContract, bytes32 _priceId)
         internal
         view
         returns (PythResponse memory pythResponse)
@@ -108,7 +94,7 @@ abstract contract PythPriceFeedBase is IMainnetPriceFeed {
         uint256 gasBefore = gasleft();
 
         // Try to get latest price data:
-        try _pythContract.getPriceUnsafe(_priceId) returns (IPyth.Price memory priceData) {
+        try _pythContract.getPriceUnsafe(_priceId) returns (PythStructs.Price memory priceData) {
             // If call to Pyth succeeds, return the response and success = true
             pythResponse.price = priceData.price;
             pythResponse.timestamp = priceData.publishTime;

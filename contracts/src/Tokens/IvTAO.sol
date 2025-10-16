@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.4;
 
-interface Interface {
+interface IvTAO {
     error AddressEmptyCode(address target);
     error ECDSAInvalidSignature();
     error ECDSAInvalidSignatureLength(uint256 length);

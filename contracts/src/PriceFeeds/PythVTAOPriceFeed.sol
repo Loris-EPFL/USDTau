@@ -31,6 +31,7 @@ contract PythVTAOPriceFeed is PythCompositePriceFeed, IVTAOPriceFeed {
             _borrowerOperationsAddress
         )
     {
+        vTaoUsdOracleData.pythContract = IPythOracle(_pythContractAddress);
         vTaoUsdOracleData.priceId = _vTaoUsdPriceId;
         vTaoUsdOracleData.stalenessThreshold = _vTaoUsdStalenessThreshold;
         vTaoUsdOracleData.decimals = 8; // Pyth prices are typically 8 decimals
@@ -99,7 +100,7 @@ contract PythVTAOPriceFeed is PythCompositePriceFeed, IVTAOPriceFeed {
     function _getCanonicalRate() internal view override returns (uint256, bool) {
         uint256 gasBefore = gasleft();
 
-        try Interface(payable(rateProviderAddress)).vTAOtoTAO(1e18) returns (uint256 taoAmount) {
+        try IvTAO(payable(rateProviderAddress)).vTAOtoTAO(1e18) returns (uint256 taoAmount) {
             // If rate is 0, return true (invalid)
             if (taoAmount == 0) return (0, true);
 
