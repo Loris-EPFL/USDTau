@@ -325,6 +325,8 @@ contract PythTestDeployer is MetadataDeployment, Test {
             );
         }
 
+
+
         return result;
     }
 
@@ -469,11 +471,13 @@ contract PythTestDeployer is MetadataDeployment, Test {
         OracleParams memory _oracleParams,
         address _borrowerOperationsAddress
     ) internal returns (IPriceFeed) {
-        // Create PythAggregatorV3 for TAO-USD (shared by all branches)
-        deployedTaoAggregator = new PythAggregatorV3(
-            _externalAddresses.VTAOOracle, // Pyth contract address
-            0x410f41de235f2db824e562ea7ab2d3d3d4ff048316c61d629c0b93f58584e1af // TAO price ID
-        );
+        // Create PythAggregatorV3 for TAO-USD only once (shared by all branches)
+        if (address(deployedTaoAggregator) == address(0)) {
+            deployedTaoAggregator = new PythAggregatorV3(
+                _externalAddresses.VTAOOracle, // Pyth contract address
+                0x410f41de235f2db824e562ea7ab2d3d3d4ff048316c61d629c0b93f58584e1af // TAO price ID
+            );
+        }
         
         // Create PythAggregatorV3 instances for each branch
         // vTAO
