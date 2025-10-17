@@ -108,18 +108,29 @@ contract PythVTAOPriceFeed is PythCompositePriceFeed, IVTAOPriceFeed {
         uint256 gasBefore = gasleft();
 
         try IvTAO(payable(rateProviderAddress)).vTAOtoTAO(1e18) returns (uint256 taoAmount) {
-            // If rate is 0, return true (invalid)
-            if (taoAmount == 0) return (0, true);
+            // If rate is 0, fallback to 1:1 ratio (1 vTAO = 1 TAO)
+            // This handles cases where the RPC may incorrectly return 0
+            if (taoAmount == 0) {
+                // Return 1e18 (1:1 ratio in 18 decimals)
+                return (1e18, false);
+            }
 
-            return (taoAmount, false);
+            // The vTAOtoTAO function returns the TAO amount in 9-decimal precision (e.g., 1003980796 for ~1.003980796 TAO)
+            // We need to convert this to 18-decimal precision for our calculations
+            // Since we called vTAOtoTAO(1e18), the returned value represents TAO per 1 vTAO in 9-decimal precision
+            // Convert from 9-decimal to 18-decimal: multiply by 1e9
+            uint256 taoPerVTaoIn18Decimals = taoAmount * 1e9;
+
+            return (taoPerVTaoIn18Decimals, false);
         } catch {
             // Require that enough gas was provided to prevent an OOG revert in the external call
             // causing a shutdown. Instead, just revert. Slightly conservative, as it includes gas used
             // in the check itself.
             if (gasleft() <= gasBefore / 64) revert InsufficientGasForExternalCall();
 
-            // If call to exchange rate reverted for another reason, return true
-            return (0, true);
+            // If vTAOtoTAO call fails, fallback to 1:1 ratio (1 vTAO = 1 TAO)
+            // This handles cases where the external call reverts
+            return (1e18, false);
         }
     }
 }

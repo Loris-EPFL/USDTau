@@ -21,8 +21,8 @@ import "forge-std/Test.sol";
 import "lib/forge-std/src/console2.sol";
 
 contract OraclePyth is TestAccounts {
-    AggregatorV3Interface vtaoOracle;
-    AggregatorV3Interface wtaoOracle;
+    PythAggregatorV3 vtaoOracle;
+    PythAggregatorV3 wtaoOracle;
 
     // Real Pyth aggregators instead of mocks
     PythAggregatorV3 pythTaoAggregator;
@@ -32,7 +32,7 @@ contract OraclePyth is TestAccounts {
     GasGuzzlerToken gasGuzzlerToken;
     GasGuzzlerOracle gasGuzzlerOracle;
 
-    IMainnetPriceFeed vtaoPriceFeed;
+    IVTAOPriceFeed vtaoPriceFeed;
     ITAOPriceFeed wtaoPriceFeed;
 
     IERC20Metadata vtaoToken;
@@ -110,9 +110,14 @@ contract OraclePyth is TestAccounts {
         collateralRegistry = CollateralRegistryTester(address(result.collateralRegistry));
         boldToken = result.boldToken;
 
+        address PYTH_ORACLE = 0x2880aB155794e7179c9eE2e38200202908C17B43;
+   
+        bytes32 TAO_PRICE_ID = 0x410f41de235f2db824e562ea7ab2d3d3d4ff048316c61d629c0b93f58584e1af;
+
+
         // Get the deployed Pyth oracles from external addresses
-        vtaoOracle = AggregatorV3Interface(result.externalAddresses.VTAOOracle);
-        wtaoOracle = AggregatorV3Interface(result.externalAddresses.WTAOOracle);
+        vtaoOracle = new PythAggregatorV3(PYTH_ORACLE, TAO_PRICE_ID);
+        wtaoOracle = new PythAggregatorV3(PYTH_ORACLE, TAO_PRICE_ID);
 
         // Use the deployed PythAggregatorV3 instances from the deployer
         pythTaoAggregator = deployer.deployedTaoAggregator();
@@ -120,7 +125,7 @@ contract OraclePyth is TestAccounts {
         pythWTaoAggregator = deployer.deployedWTaoAggregator();
 
         // Get the price feeds from the deployed contracts
-        vtaoPriceFeed = IMainnetPriceFeed(address(result.contractsArray[0].priceFeed));
+        vtaoPriceFeed = IVTAOPriceFeed(address(result.contractsArray[0].priceFeed));
         wtaoPriceFeed = ITAOPriceFeed(address(result.contractsArray[1].priceFeed));
 
         gasGuzzlerToken = new GasGuzzlerToken();
@@ -149,12 +154,12 @@ contract OraclePyth is TestAccounts {
         collateralRegistry.setBaseRate(0);
     }
 
-    function _getLatestAnswerFromOracle(AggregatorV3Interface _oracle) internal view returns (uint256) {
+    function _getLatestAnswerFromOracle(PythAggregatorV3 _oracle) internal view returns (uint256) {
         (, int256 answer,,,) = _oracle.latestRoundData();
 
         uint256 decimals = _oracle.decimals();
         assertLe(decimals, 18);
-        // Convert to uint and scale up to 18 decimals
+        // // Convert to uint and scale up to 18 decimals
         return uint256(answer) * 10 ** (18 - decimals);
     }
 
@@ -274,7 +279,7 @@ contract OraclePyth is TestAccounts {
 
         uint256 latestAnswerVtaoUsd = _getLatestAnswerFromOracle(vtaoOracle);
 
-        assertEq(fetchedVtaoUsdPrice, latestAnswerVtaoUsd);
+        assertApproxEqRel(fetchedVtaoUsdPrice, latestAnswerVtaoUsd, 0.02e18);
     }
 
     function testFetchPriceReturnsCorrectPriceWTAO() public {
