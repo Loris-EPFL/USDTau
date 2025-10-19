@@ -85,10 +85,7 @@ contract DeployTaoLiquity is Script {
     // CREATE2 salt for deterministic addresses
     bytes32 constant SALT = keccak256("TaoLiquity");
 
-    PythAggregatorV3 public deployedWTaoAggregator = new PythAggregatorV3(
-            PYTH_ORACLE, // Pyth contract address
-            WTAO_PRICE_FEED_ID // TAO price ID
-        );
+    PythAggregatorV3 public deployedWTaoAggregator;
 
     struct LiquityContracts {
         BoldToken boldToken;
@@ -125,6 +122,12 @@ contract DeployTaoLiquity is Script {
     function run() external {
         // uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
         vm.startBroadcast(); 
+
+        deployedWTaoAggregator = new PythAggregatorV3(
+            PYTH_ORACLE, // Pyth contract address
+            WTAO_PRICE_FEED_ID // TAO price ID
+        );
+
 
         console2.log("Deploying Tao Liquity contracts...");
         // console2.log("Deployer address:", vm.addr(deployerPrivateKey));
