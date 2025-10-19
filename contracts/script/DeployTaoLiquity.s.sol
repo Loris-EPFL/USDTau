@@ -51,6 +51,12 @@ import {IBoldToken} from "src/Interfaces/IBoldToken.sol";
 // Test contracts
 import {MockInterestRouter} from "test/TestContracts/MockInterestRouter.sol";
 
+// Zappers
+import {WETHZapper} from "src/Zappers/WETHZapper.sol";
+import {BalancerFlashLoan} from "src/Zappers/Modules/FlashLoans/BalancerFlashLoan.sol";
+import {IFlashLoanProvider} from "src/Zappers/Interfaces/IFlashLoanProvider.sol";
+import {IExchange} from "src/Zappers/Interfaces/IExchange.sol";
+
 // Uniswap V3 interfaces
 import {IUniswapV3Factory} from "src/Zappers/Modules/Exchanges/UniswapV3/IUniswapV3Factory.sol";
 import {IUniswapV3Pool} from "src/Zappers/Modules/Exchanges/UniswapV3/IUniswapV3Pool.sol";
@@ -108,6 +114,7 @@ contract DeployTaoLiquity is Script {
         HintHelpers hintHelpers;
         MultiTroveGetter multiTroveGetter;
         DebtInFrontHelper debtInFrontHelper;
+        WETHZapper wethZapper;
     }
 
     struct PreminedAddresses {
@@ -163,6 +170,7 @@ contract DeployTaoLiquity is Script {
         console2.log("HintHelpers:", address(contracts.hintHelpers));
         console2.log("MultiTroveGetter:", address(contracts.multiTroveGetter));
         console2.log("DebtInFrontHelper:", address(contracts.debtInFrontHelper));
+        console2.log("WETHZapper:", address(contracts.wethZapper));
 
         vm.stopBroadcast();
     }
@@ -230,13 +238,11 @@ contract DeployTaoLiquity is Script {
         require(address(contracts.interestRouter) == addresses.interestRouter, "InterestRouter address mismatch");
         
         // Deploy helper contracts
-        IERC20Metadata[] memory collaterals = new IERC20Metadata[](2);
-        collaterals[0] = IERC20Metadata(WTAO_ADDRESS);
-        collaterals[1] = IERC20Metadata(VTAO_ADDRESS);
+        IERC20Metadata[] memory collaterals = new IERC20Metadata[](1);
+        collaterals[0] = IERC20Metadata(WETH_ADDRESS); // Use WTAO as the single collateral
         
-        ITroveManager[] memory troveManagers = new ITroveManager[](2);
+        ITroveManager[] memory troveManagers = new ITroveManager[](1);
         troveManagers[0] = ITroveManager(addresses.troveManager);
-        troveManagers[1] = ITroveManager(addresses.troveManager); // Same trove manager for both collaterals
         
         contracts.collateralRegistry = new CollateralRegistry{salt: SALT}(
             contracts.boldToken,
@@ -253,6 +259,9 @@ contract DeployTaoLiquity is Script {
         
         contracts.debtInFrontHelper = new DebtInFrontHelper{salt: SALT}(contracts.collateralRegistry, contracts.hintHelpers);
         require(address(contracts.debtInFrontHelper) == addresses.debtInFrontHelper, "DebtInFrontHelper address mismatch");
+        
+        // Deploy WETHZapper (using WTAO instead of WETH)
+        contracts.wethZapper = _deployWETHZapper(contracts.addressesRegistry);
         
         console2.log("All contracts deployed successfully with CREATE2 addresses");
         
@@ -323,13 +332,11 @@ contract DeployTaoLiquity is Script {
         bytes memory interestRouterBytecode = type(MockInterestRouter).creationCode;
         
         // Helper contracts bytecode
-        IERC20Metadata[] memory collateralsForBytecode = new IERC20Metadata[](2);
-        collateralsForBytecode[0] = IERC20Metadata(WTAO_ADDRESS);
-        collateralsForBytecode[1] = IERC20Metadata(VTAO_ADDRESS);
+        IERC20Metadata[] memory collateralsForBytecode = new IERC20Metadata[](1);
+        collateralsForBytecode[0] = IERC20Metadata(WETH_ADDRESS); // Use WTAO as the single collateral
         
-        ITroveManager[] memory troveManagersForBytecode = new ITroveManager[](2);
+        ITroveManager[] memory troveManagersForBytecode = new ITroveManager[](1);
         troveManagersForBytecode[0] = ITroveManager(vm.computeCreate2Address(SALT, keccak256(troveManagerBytecode)));
-        troveManagersForBytecode[1] = ITroveManager(vm.computeCreate2Address(SALT, keccak256(troveManagerBytecode)));
         
         bytes memory collateralRegistryBytecode = abi.encodePacked(
             type(CollateralRegistry).creationCode,
@@ -380,7 +387,7 @@ contract DeployTaoLiquity is Script {
     function _populateAddressesRegistry(AddressesRegistry registry, PreminedAddresses memory addresses) internal {
         // Set all addresses in the registry using the correct AddressVars struct
         IAddressesRegistry.AddressVars memory addressVars = IAddressesRegistry.AddressVars({
-            collToken: IERC20Metadata(VTAO_ADDRESS),
+            collToken: IERC20Metadata(WETH_ADDRESS), // Use WTAO as collateral for WETHZapper compatibility
             borrowerOperations: IBorrowerOperations(addresses.borrowerOperations),
             troveManager: ITroveManager(addresses.troveManager),
             troveNFT: ITroveNFT(addresses.troveNFT),
@@ -404,5 +411,20 @@ contract DeployTaoLiquity is Script {
         console2.log("AddressesRegistry populated with all premined addresses");
     }
     
+    function _deployWETHZapper(AddressesRegistry _addressesRegistry) internal returns (WETHZapper) {
+        // Deploy flash loan provider
+        IFlashLoanProvider flashLoanProvider = new BalancerFlashLoan();
+        
+        // For TAO/WTAO, we don't need an exchange since we're only wrapping TAO to WTAO
+        // We can pass address(0) for the exchange parameter since WETHZapper will only use it for swaps
+        IExchange exchange = IExchange(address(0));
+        
+        // Deploy WETHZapper with WTAO instead of WETH
+        WETHZapper wethZapper = new WETHZapper(_addressesRegistry, flashLoanProvider, exchange);
+        
+        console2.log("WETHZapper deployed for WTAO at:", address(wethZapper));
+        
+        return wethZapper;
+    }
 
 }
