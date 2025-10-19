@@ -1,0 +1,775 @@
+Compiling 1 files with Solc 0.8.24
+Solc 0.8.24 finished in 125.50s
+Compiler run successful with warnings:
+Warning (2072): Unused local variable.
+  --> node_modules/@pythnetwork/pyth-sdk-solidity/PythAggregatorV3.sol:35:10:
+   |
+35 |         (bool success, ) = payable(msg.sender).call{
+   |          ^^^^^^^^^^^^
+
+Traces:
+  [26459623] DeployTaoLiquity::run()
+    ├─ [0] VM::startBroadcast()
+    │   └─ ← [Return]
+    ├─ [484141] → new PythAggregatorV3@0x5FbDB2315678afecb367f032d93F642f64180aa3
+    │   └─ ← [Return] 2196 bytes of code
+    ├─ [0] console::log("Deploying Tao Liquity contracts...") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::computeCreate2Address(0xa7d723ac856a085ed981adae6aa9c0d05a31cfc49ecbe0b7529d9d1c73242471, 0x0080792f55b22878b62333bb5b18ac74019046100ccf51e022a5de1f8560b6db) [staticcall]
+    │   └─ ← [Return] AddressesRegistry: [0xb7A79D2AB56AdF2d1977262dF96FE654c3669d03]
+    ├─ [0] VM::computeCreate2Address(0xa7d723ac856a085ed981adae6aa9c0d05a31cfc49ecbe0b7529d9d1c73242471, 0x9cc8ff61226d6227441b9128260f1d431e43fb32cd4c87587759b697571c4b5a) [staticcall]
+    │   └─ ← [Return] BorrowerOperations: [0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d]
+    ├─ [0] VM::computeCreate2Address(0xa7d723ac856a085ed981adae6aa9c0d05a31cfc49ecbe0b7529d9d1c73242471, 0x1b0ce6623493d0aa9a97938d2d40f63a22763f4d4392c1656f2c92355fb2612b) [staticcall]
+    │   └─ ← [Return] TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648]
+    ├─ [0] VM::computeCreate2Address(0xa7d723ac856a085ed981adae6aa9c0d05a31cfc49ecbe0b7529d9d1c73242471, 0x1b0ce6623493d0aa9a97938d2d40f63a22763f4d4392c1656f2c92355fb2612b) [staticcall]
+    │   └─ ← [Return] TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648]
+    ├─ [0] VM::computeCreate2Address(0xa7d723ac856a085ed981adae6aa9c0d05a31cfc49ecbe0b7529d9d1c73242471, 0xd002a153d599ab6c4da62570f643904e91b1fd3976ce2d1fc049bdf5dbea7b28) [staticcall]
+    │   └─ ← [Return] BoldToken: [0xF7cF6242ce47eB2995FB246eD5eabb6E835510C5]
+    ├─ [0] VM::computeCreate2Address(0xa7d723ac856a085ed981adae6aa9c0d05a31cfc49ecbe0b7529d9d1c73242471, 0x71cae508194e483b14aa442f83976547818ecaa053f96f3ee46adcd92dec6af7) [staticcall]
+    │   └─ ← [Return] CollateralRegistry: [0xe53De4925595C758af0692ae88b3a6c600E6d6cB]
+    ├─ [0] VM::computeCreate2Address(0xa7d723ac856a085ed981adae6aa9c0d05a31cfc49ecbe0b7529d9d1c73242471, 0x71cae508194e483b14aa442f83976547818ecaa053f96f3ee46adcd92dec6af7) [staticcall]
+    │   └─ ← [Return] CollateralRegistry: [0xe53De4925595C758af0692ae88b3a6c600E6d6cB]
+    ├─ [0] VM::computeCreate2Address(0xa7d723ac856a085ed981adae6aa9c0d05a31cfc49ecbe0b7529d9d1c73242471, 0x71cae508194e483b14aa442f83976547818ecaa053f96f3ee46adcd92dec6af7) [staticcall]
+    │   └─ ← [Return] CollateralRegistry: [0xe53De4925595C758af0692ae88b3a6c600E6d6cB]
+    ├─ [0] VM::computeCreate2Address(0xa7d723ac856a085ed981adae6aa9c0d05a31cfc49ecbe0b7529d9d1c73242471, 0x48287a89a9455e4a6bed7b2b2abbe9d1faceaf62fd88f6c3cd4fcde789d9abbd) [staticcall]
+    │   └─ ← [Return] HintHelpers: [0xaD2A3b7c2DCeE5A2Aa67eF467a488c05AF6cbF0F]
+    ├─ [0] VM::computeCreate2Address(0xa7d723ac856a085ed981adae6aa9c0d05a31cfc49ecbe0b7529d9d1c73242471, 0xd002a153d599ab6c4da62570f643904e91b1fd3976ce2d1fc049bdf5dbea7b28) [staticcall]
+    │   └─ ← [Return] BoldToken: [0xF7cF6242ce47eB2995FB246eD5eabb6E835510C5]
+    ├─ [0] VM::computeCreate2Address(0xa7d723ac856a085ed981adae6aa9c0d05a31cfc49ecbe0b7529d9d1c73242471, 0x9cc8ff61226d6227441b9128260f1d431e43fb32cd4c87587759b697571c4b5a) [staticcall]
+    │   └─ ← [Return] BorrowerOperations: [0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d]
+    ├─ [0] VM::computeCreate2Address(0xa7d723ac856a085ed981adae6aa9c0d05a31cfc49ecbe0b7529d9d1c73242471, 0x1b0ce6623493d0aa9a97938d2d40f63a22763f4d4392c1656f2c92355fb2612b) [staticcall]
+    │   └─ ← [Return] TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648]
+    ├─ [0] VM::computeCreate2Address(0xa7d723ac856a085ed981adae6aa9c0d05a31cfc49ecbe0b7529d9d1c73242471, 0x8eb6c7f7b6c42e1254379b3122abe0880592f4735df347f650af1bf79f0c60c2) [staticcall]
+    │   └─ ← [Return] TroveNFT: [0x56CAc7490661CE88D9c1B2fd3bD7b4c469205fBE]
+    ├─ [0] VM::computeCreate2Address(0xa7d723ac856a085ed981adae6aa9c0d05a31cfc49ecbe0b7529d9d1c73242471, 0x333c6f4c0cb2a0bea24674ee82c33288b0546009ffb3d204c3de0f89a3a60277) [staticcall]
+    │   └─ ← [Return] StabilityPool: [0x9B73e6b79070DC5B269Cf3a3C8cf23291D98222D]
+    ├─ [0] VM::computeCreate2Address(0xa7d723ac856a085ed981adae6aa9c0d05a31cfc49ecbe0b7529d9d1c73242471, 0x49caa46500ebf75c9a868f9b35c0cf162482d7b94af8c63919c293b22e947bcb) [staticcall]
+    │   └─ ← [Return] ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225]
+    ├─ [0] VM::computeCreate2Address(0xa7d723ac856a085ed981adae6aa9c0d05a31cfc49ecbe0b7529d9d1c73242471, 0xf487c7eb8e2c85b6618e30833bbe8eb25728172b53a667518b6f8a54d9dc1edd) [staticcall]
+    │   └─ ← [Return] DefaultPool: [0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc]
+    ├─ [0] VM::computeCreate2Address(0xa7d723ac856a085ed981adae6aa9c0d05a31cfc49ecbe0b7529d9d1c73242471, 0x19b2c5ddd45c4af2c0bf0445c2fc1231bccc954cfc0e3c7cde9c8e1490dd0a26) [staticcall]
+    │   └─ ← [Return] CollSurplusPool: [0x3957269f97A7223857066597651dd29E8D949b02]
+    ├─ [0] VM::computeCreate2Address(0xa7d723ac856a085ed981adae6aa9c0d05a31cfc49ecbe0b7529d9d1c73242471, 0xbb31bc93a193d6740ca63cd4c80183cc558a8ea82d6327bd35e1bd4146042f4a) [staticcall]
+    │   └─ ← [Return] SortedTroves: [0xF0b030DBa4C00661b6883a6fDa25C2B65EB80091]
+    ├─ [0] VM::computeCreate2Address(0xa7d723ac856a085ed981adae6aa9c0d05a31cfc49ecbe0b7529d9d1c73242471, 0xa08387ca68e7b49434938eb30268d834eda8d23c0996a1beb73575de9d72258f) [staticcall]
+    │   └─ ← [Return] GasPool: [0x043237E4E06dEB9214c7b8CD0fC1AA46bF6c1E06]
+    ├─ [0] VM::computeCreate2Address(0xa7d723ac856a085ed981adae6aa9c0d05a31cfc49ecbe0b7529d9d1c73242471, 0x2299c18cbff2ea86bd2abc2f1dc45718bd671d33621c74b211e794cfed29989f) [staticcall]
+    │   └─ ← [Return] PythWTAOPriceFeed: [0x951644aAa55EBF6F3E0823B8Ec5505324Fb256eA]
+    ├─ [0] VM::computeCreate2Address(0xa7d723ac856a085ed981adae6aa9c0d05a31cfc49ecbe0b7529d9d1c73242471, 0x509d8da69f50cd4408c390222e3cac7da25bb9990ac0b062ba89f74ef1f3f192) [staticcall]
+    │   └─ ← [Return] MockInterestRouter: [0x04b608E82335f7a92Dff96C1B020736d7e96bC9b]
+    ├─ [0] VM::computeCreate2Address(0xa7d723ac856a085ed981adae6aa9c0d05a31cfc49ecbe0b7529d9d1c73242471, 0x71cae508194e483b14aa442f83976547818ecaa053f96f3ee46adcd92dec6af7) [staticcall]
+    │   └─ ← [Return] CollateralRegistry: [0xe53De4925595C758af0692ae88b3a6c600E6d6cB]
+    ├─ [0] VM::computeCreate2Address(0xa7d723ac856a085ed981adae6aa9c0d05a31cfc49ecbe0b7529d9d1c73242471, 0x48287a89a9455e4a6bed7b2b2abbe9d1faceaf62fd88f6c3cd4fcde789d9abbd) [staticcall]
+    │   └─ ← [Return] HintHelpers: [0xaD2A3b7c2DCeE5A2Aa67eF467a488c05AF6cbF0F]
+    ├─ [0] VM::computeCreate2Address(0xa7d723ac856a085ed981adae6aa9c0d05a31cfc49ecbe0b7529d9d1c73242471, 0xa2e5b11920926265c4c5b1048c5dd942912d9c2d0605e22fb41235b71798d789) [staticcall]
+    │   └─ ← [Return] MultiTroveGetter: [0xAc9692399E6DEfDEef2ACBB2D2B088D28f84280a]
+    ├─ [0] VM::computeCreate2Address(0xa7d723ac856a085ed981adae6aa9c0d05a31cfc49ecbe0b7529d9d1c73242471, 0x8272698a5509f6356efecfc9faa6a79cbe6dee154f4f362b3d8f9716eb0c7d7d) [staticcall]
+    │   └─ ← [Return] DebtInFrontHelper: [0x2177fc4d216E79b89b35dE4551B65C608aa53E25]
+    ├─ [779669] Create2Deployer::create2()
+    │   ├─ [745883] → new AddressesRegistry@0xb7A79D2AB56AdF2d1977262dF96FE654c3669d03
+    │   │   ├─ emit OwnershipTransferred(previousOwner: 0x0000000000000000000000000000000000000000, newOwner: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266)
+    │   │   └─ ← [Return] 3603 bytes of code
+    │   └─ ← [Return] 0xb7a79d2ab56adf2d1977262df96fe654c3669d03
+    ├─ [341272] AddressesRegistry::setAddresses(AddressVars({ collToken: 0x31049849CCdD983D8F401077537438eaF12B12Af, borrowerOperations: 0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d, troveManager: 0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648, troveNFT: 0x56CAc7490661CE88D9c1B2fd3bD7b4c469205fBE, metadataNFT: 0x0000000000000000000000000000000000000000, stabilityPool: 0x9B73e6b79070DC5B269Cf3a3C8cf23291D98222D, priceFeed: 0x951644aAa55EBF6F3E0823B8Ec5505324Fb256eA, activePool: 0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225, defaultPool: 0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc, gasPoolAddress: 0x043237E4E06dEB9214c7b8CD0fC1AA46bF6c1E06, collSurplusPool: 0x3957269f97A7223857066597651dd29E8D949b02, sortedTroves: 0xF0b030DBa4C00661b6883a6fDa25C2B65EB80091, interestRouter: 0x04b608E82335f7a92Dff96C1B020736d7e96bC9b, hintHelpers: 0x0000000000000000000000000000000000000000, multiTroveGetter: 0x0000000000000000000000000000000000000000, collateralRegistry: 0x0000000000000000000000000000000000000000, boldToken: 0xF7cF6242ce47eB2995FB246eD5eabb6E835510C5, WETH: 0x9Dc08C6e2BF0F1eeD1E00670f80Df39145529F81 }))
+    │   ├─ emit CollTokenAddressChanged(_newCollTokenAddress: 0x31049849CCdD983D8F401077537438eaF12B12Af)
+    │   ├─ emit BorrowerOperationsAddressChanged(_newBorrowerOperationsAddress: BorrowerOperations: [0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d])
+    │   ├─ emit TroveManagerAddressChanged(_newTroveManagerAddress: TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648])
+    │   ├─ emit TroveNFTAddressChanged(_newTroveNFTAddress: TroveNFT: [0x56CAc7490661CE88D9c1B2fd3bD7b4c469205fBE])
+    │   ├─ emit MetadataNFTAddressChanged(_metadataNFTAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit StabilityPoolAddressChanged(_newStabilityPoolAddress: StabilityPool: [0x9B73e6b79070DC5B269Cf3a3C8cf23291D98222D])
+    │   ├─ emit PriceFeedAddressChanged(_priceFeedAddress: PythWTAOPriceFeed: [0x951644aAa55EBF6F3E0823B8Ec5505324Fb256eA])
+    │   ├─ emit ActivePoolAddressChanged(_activePoolAddress: ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225])
+    │   ├─ emit DefaultPoolAddressChanged(_newDefaultPoolAddress: DefaultPool: [0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc])
+    │   ├─ emit GasPoolAddressChanged(_gasPoolAddress: GasPool: [0x043237E4E06dEB9214c7b8CD0fC1AA46bF6c1E06])
+    │   ├─ emit CollSurplusPoolAddressChanged(_collSurplusPoolAddress: CollSurplusPool: [0x3957269f97A7223857066597651dd29E8D949b02])
+    │   ├─ emit SortedTrovesAddressChanged(_sortedTrovesAddress: SortedTroves: [0xF0b030DBa4C00661b6883a6fDa25C2B65EB80091])
+    │   ├─ emit InterestRouterAddressChanged(_interestRouterAddress: MockInterestRouter: [0x04b608E82335f7a92Dff96C1B020736d7e96bC9b])
+    │   ├─ emit HintHelpersAddressChanged(_hintHelpersAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit MultiTroveGetterAddressChanged(_multiTroveGetterAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit CollateralRegistryAddressChanged(_collateralRegistryAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit BoldTokenAddressChanged(_boldTokenAddress: BoldToken: [0xF7cF6242ce47eB2995FB246eD5eabb6E835510C5])
+    │   ├─ emit WETHAddressChanged(_wethAddress: 0x9Dc08C6e2BF0F1eeD1E00670f80Df39145529F81)
+    │   ├─ emit OwnershipTransferred(previousOwner: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266, newOwner: 0x0000000000000000000000000000000000000000)
+    │   └─ ← [Stop]
+    ├─ [0] console::log("AddressesRegistry populated with all premined addresses") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [1385262] Create2Deployer::create2()
+    │   ├─ [1349825] → new BoldToken@0xF7cF6242ce47eB2995FB246eD5eabb6E835510C5
+    │   │   ├─ emit OwnershipTransferred(previousOwner: 0x0000000000000000000000000000000000000000, newOwner: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266)
+    │   │   └─ ← [Return] 6392 bytes of code
+    │   └─ ← [Return] 0xf7cf6242ce47eb2995fb246ed5eabb6e835510c5
+    ├─ [6090732] Create2Deployer::create2()
+    │   ├─ [6044810] → new BorrowerOperations@0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d
+    │   │   ├─ [634] AddressesRegistry::activePool() [staticcall]
+    │   │   │   └─ ← [Return] ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225]
+    │   │   ├─ [436] AddressesRegistry::defaultPool() [staticcall]
+    │   │   │   └─ ← [Return] DefaultPool: [0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc]
+    │   │   ├─ [546] AddressesRegistry::priceFeed() [staticcall]
+    │   │   │   └─ ← [Return] PythWTAOPriceFeed: [0x951644aAa55EBF6F3E0823B8Ec5505324Fb256eA]
+    │   │   ├─ emit ActivePoolAddressChanged(_activePoolAddress: ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225])
+    │   │   ├─ emit DefaultPoolAddressChanged(_newDefaultPoolAddress: DefaultPool: [0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc])
+    │   │   ├─ emit PriceFeedAddressChanged(_priceFeedAddress: PythWTAOPriceFeed: [0x951644aAa55EBF6F3E0823B8Ec5505324Fb256eA])
+    │   │   ├─ [304] AddressesRegistry::troveNFT() [staticcall]
+    │   │   │   └─ ← [Return] TroveNFT: [0x56CAc7490661CE88D9c1B2fd3bD7b4c469205fBE]
+    │   │   ├─ emit TroveNFTAddressChanged(_newTroveNFTAddress: TroveNFT: [0x56CAc7490661CE88D9c1B2fd3bD7b4c469205fBE])
+    │   │   ├─ [392] AddressesRegistry::collToken() [staticcall]
+    │   │   │   └─ ← [Return] 0x31049849CCdD983D8F401077537438eaF12B12Af
+    │   │   ├─ [722] AddressesRegistry::WETH()
+    │   │   │   └─ ← [Return] 0x9Dc08C6e2BF0F1eeD1E00670f80Df39145529F81
+    │   │   ├─ [353] AddressesRegistry::CCR()
+    │   │   │   └─ ← [Return] 1500000000000000000 [1.5e18]
+    │   │   ├─ [375] AddressesRegistry::SCR()
+    │   │   │   └─ ← [Return] 1300000000000000000 [1.3e18]
+    │   │   ├─ [485] AddressesRegistry::MCR()
+    │   │   │   └─ ← [Return] 1100000000000000000 [1.1e18]
+    │   │   ├─ [529] AddressesRegistry::BCR()
+    │   │   │   └─ ← [Return] 100000000000000000 [1e17]
+    │   │   ├─ [458] AddressesRegistry::troveManager() [staticcall]
+    │   │   │   └─ ← [Return] TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648]
+    │   │   ├─ [851] AddressesRegistry::gasPoolAddress() [staticcall]
+    │   │   │   └─ ← [Return] GasPool: [0x043237E4E06dEB9214c7b8CD0fC1AA46bF6c1E06]
+    │   │   ├─ [766] AddressesRegistry::collSurplusPool() [staticcall]
+    │   │   │   └─ ← [Return] CollSurplusPool: [0x3957269f97A7223857066597651dd29E8D949b02]
+    │   │   ├─ [744] AddressesRegistry::sortedTroves() [staticcall]
+    │   │   │   └─ ← [Return] SortedTroves: [0xF0b030DBa4C00661b6883a6fDa25C2B65EB80091]
+    │   │   ├─ [524] AddressesRegistry::boldToken() [staticcall]
+    │   │   │   └─ ← [Return] BoldToken: [0xF7cF6242ce47eB2995FB246eD5eabb6E835510C5]
+    │   │   ├─ emit TroveManagerAddressChanged(_newTroveManagerAddress: TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648])
+    │   │   ├─ emit GasPoolAddressChanged(_gasPoolAddress: GasPool: [0x043237E4E06dEB9214c7b8CD0fC1AA46bF6c1E06])
+    │   │   ├─ emit CollSurplusPoolAddressChanged(_collSurplusPoolAddress: CollSurplusPool: [0x3957269f97A7223857066597651dd29E8D949b02])
+    │   │   ├─ emit SortedTrovesAddressChanged(_sortedTrovesAddress: SortedTroves: [0xF0b030DBa4C00661b6883a6fDa25C2B65EB80091])
+    │   │   ├─ emit BoldTokenAddressChanged(_boldTokenAddress: BoldToken: [0xF7cF6242ce47eB2995FB246eD5eabb6E835510C5])
+    │   │   ├─ [29747] 0x31049849CCdD983D8F401077537438eaF12B12Af::approve(ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225], 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    │   │   │   ├─ [24851] 0x58ea2Bb193B1429Cb90D24195E6ac4Ccb0B27a12::approve(ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225], 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77]) [delegatecall]
+    │   │   │   │   ├─ emit Approval(owner: BorrowerOperations: [0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d], spender: ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225], value: 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    │   │   │   │   └─ ← [Return] true
+    │   │   │   └─ ← [Return] true
+    │   │   └─ ← [Return] 29016 bytes of code
+    │   └─ ← [Return] 0x992f2d8434acdbe1e0aa3de2b45844df24ff9d2d
+    ├─ [5461103] Create2Deployer::create2()
+    │   ├─ [5416795] → new TroveManager@0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648
+    │   │   ├─ [634] AddressesRegistry::activePool() [staticcall]
+    │   │   │   └─ ← [Return] ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225]
+    │   │   ├─ [436] AddressesRegistry::defaultPool() [staticcall]
+    │   │   │   └─ ← [Return] DefaultPool: [0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc]
+    │   │   ├─ [546] AddressesRegistry::priceFeed() [staticcall]
+    │   │   │   └─ ← [Return] PythWTAOPriceFeed: [0x951644aAa55EBF6F3E0823B8Ec5505324Fb256eA]
+    │   │   ├─ emit ActivePoolAddressChanged(_activePoolAddress: ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225])
+    │   │   ├─ emit DefaultPoolAddressChanged(_newDefaultPoolAddress: DefaultPool: [0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc])
+    │   │   ├─ emit PriceFeedAddressChanged(_priceFeedAddress: PythWTAOPriceFeed: [0x951644aAa55EBF6F3E0823B8Ec5505324Fb256eA])
+    │   │   ├─ [353] AddressesRegistry::CCR()
+    │   │   │   └─ ← [Return] 1500000000000000000 [1.5e18]
+    │   │   ├─ [485] AddressesRegistry::MCR()
+    │   │   │   └─ ← [Return] 1100000000000000000 [1.1e18]
+    │   │   ├─ [375] AddressesRegistry::SCR()
+    │   │   │   └─ ← [Return] 1300000000000000000 [1.3e18]
+    │   │   ├─ [287] AddressesRegistry::LIQUIDATION_PENALTY_SP()
+    │   │   │   └─ ← [Return] 50000000000000000 [5e16]
+    │   │   ├─ [221] AddressesRegistry::LIQUIDATION_PENALTY_REDISTRIBUTION()
+    │   │   │   └─ ← [Return] 50000000000000000 [5e16]
+    │   │   ├─ [304] AddressesRegistry::troveNFT() [staticcall]
+    │   │   │   └─ ← [Return] TroveNFT: [0x56CAc7490661CE88D9c1B2fd3bD7b4c469205fBE]
+    │   │   ├─ [568] AddressesRegistry::borrowerOperations() [staticcall]
+    │   │   │   └─ ← [Return] BorrowerOperations: [0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d]
+    │   │   ├─ [268] AddressesRegistry::stabilityPool() [staticcall]
+    │   │   │   └─ ← [Return] StabilityPool: [0x9B73e6b79070DC5B269Cf3a3C8cf23291D98222D]
+    │   │   ├─ [851] AddressesRegistry::gasPoolAddress() [staticcall]
+    │   │   │   └─ ← [Return] GasPool: [0x043237E4E06dEB9214c7b8CD0fC1AA46bF6c1E06]
+    │   │   ├─ [766] AddressesRegistry::collSurplusPool() [staticcall]
+    │   │   │   └─ ← [Return] CollSurplusPool: [0x3957269f97A7223857066597651dd29E8D949b02]
+    │   │   ├─ [524] AddressesRegistry::boldToken() [staticcall]
+    │   │   │   └─ ← [Return] BoldToken: [0xF7cF6242ce47eB2995FB246eD5eabb6E835510C5]
+    │   │   ├─ [744] AddressesRegistry::sortedTroves() [staticcall]
+    │   │   │   └─ ← [Return] SortedTroves: [0xF0b030DBa4C00661b6883a6fDa25C2B65EB80091]
+    │   │   ├─ [722] AddressesRegistry::WETH()
+    │   │   │   └─ ← [Return] 0x9Dc08C6e2BF0F1eeD1E00670f80Df39145529F81
+    │   │   ├─ [810] AddressesRegistry::collateralRegistry() [staticcall]
+    │   │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   │   ├─ emit TroveNFTAddressChanged(_newTroveNFTAddress: TroveNFT: [0x56CAc7490661CE88D9c1B2fd3bD7b4c469205fBE])
+    │   │   ├─ emit BorrowerOperationsAddressChanged(_newBorrowerOperationsAddress: BorrowerOperations: [0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d])
+    │   │   ├─ emit StabilityPoolAddressChanged(_newStabilityPoolAddress: StabilityPool: [0x9B73e6b79070DC5B269Cf3a3C8cf23291D98222D])
+    │   │   ├─ emit GasPoolAddressChanged(_gasPoolAddress: GasPool: [0x043237E4E06dEB9214c7b8CD0fC1AA46bF6c1E06])
+    │   │   ├─ emit CollSurplusPoolAddressChanged(_collSurplusPoolAddress: CollSurplusPool: [0x3957269f97A7223857066597651dd29E8D949b02])
+    │   │   ├─ emit BoldTokenAddressChanged(_boldTokenAddress: BoldToken: [0xF7cF6242ce47eB2995FB246eD5eabb6E835510C5])
+    │   │   ├─ emit SortedTrovesAddressChanged(_sortedTrovesAddress: SortedTroves: [0xF0b030DBa4C00661b6883a6fDa25C2B65EB80091])
+    │   │   ├─ emit CollateralRegistryAddressChanged(_collateralRegistryAddress: 0x0000000000000000000000000000000000000000)
+    │   │   └─ ← [Return] 25793 bytes of code
+    │   └─ ← [Return] 0x18c9e8d3b243e6ba4d537cb5b99dd587a0232648
+    ├─ [1129563] Create2Deployer::create2()
+    │   ├─ [1094696] → new TroveNFT@0x56CAc7490661CE88D9c1B2fd3bD7b4c469205fBE
+    │   │   ├─ [392] AddressesRegistry::collToken() [staticcall]
+    │   │   │   └─ ← [Return] 0x31049849CCdD983D8F401077537438eaF12B12Af
+    │   │   ├─ [3757] 0x31049849CCdD983D8F401077537438eaF12B12Af::name() [staticcall]
+    │   │   │   ├─ [3361] 0x58ea2Bb193B1429Cb90D24195E6ac4Ccb0B27a12::name() [delegatecall]
+    │   │   │   │   └─ ← [Return] "Virtual TAO"
+    │   │   │   └─ ← [Return] "Virtual TAO"
+    │   │   ├─ [392] AddressesRegistry::collToken() [staticcall]
+    │   │   │   └─ ← [Return] 0x31049849CCdD983D8F401077537438eaF12B12Af
+    │   │   ├─ [3812] 0x31049849CCdD983D8F401077537438eaF12B12Af::symbol() [staticcall]
+    │   │   │   ├─ [3416] 0x58ea2Bb193B1429Cb90D24195E6ac4Ccb0B27a12::symbol() [delegatecall]
+    │   │   │   │   └─ ← [Return] "vTAO"
+    │   │   │   └─ ← [Return] "vTAO"
+    │   │   ├─ [458] AddressesRegistry::troveManager() [staticcall]
+    │   │   │   └─ ← [Return] TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648]
+    │   │   ├─ [392] AddressesRegistry::collToken() [staticcall]
+    │   │   │   └─ ← [Return] 0x31049849CCdD983D8F401077537438eaF12B12Af
+    │   │   ├─ [832] AddressesRegistry::metadataNFT() [staticcall]
+    │   │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   │   ├─ [524] AddressesRegistry::boldToken() [staticcall]
+    │   │   │   └─ ← [Return] BoldToken: [0xF7cF6242ce47eB2995FB246eD5eabb6E835510C5]
+    │   │   └─ ← [Return] 5164 bytes of code
+    │   └─ ← [Return] 0x56cac7490661ce88d9c1b2fd3bd7b4c469205fbe
+    ├─ [1645298] Create2Deployer::create2()
+    │   ├─ [1609757] → new StabilityPool@0x9B73e6b79070DC5B269Cf3a3C8cf23291D98222D
+    │   │   ├─ [634] AddressesRegistry::activePool() [staticcall]
+    │   │   │   └─ ← [Return] ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225]
+    │   │   ├─ [436] AddressesRegistry::defaultPool() [staticcall]
+    │   │   │   └─ ← [Return] DefaultPool: [0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc]
+    │   │   ├─ [546] AddressesRegistry::priceFeed() [staticcall]
+    │   │   │   └─ ← [Return] PythWTAOPriceFeed: [0x951644aAa55EBF6F3E0823B8Ec5505324Fb256eA]
+    │   │   ├─ emit ActivePoolAddressChanged(_activePoolAddress: ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225])
+    │   │   ├─ emit DefaultPoolAddressChanged(_newDefaultPoolAddress: DefaultPool: [0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc])
+    │   │   ├─ emit PriceFeedAddressChanged(_priceFeedAddress: PythWTAOPriceFeed: [0x951644aAa55EBF6F3E0823B8Ec5505324Fb256eA])
+    │   │   ├─ [392] AddressesRegistry::collToken() [staticcall]
+    │   │   │   └─ ← [Return] 0x31049849CCdD983D8F401077537438eaF12B12Af
+    │   │   ├─ [458] AddressesRegistry::troveManager() [staticcall]
+    │   │   │   └─ ← [Return] TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648]
+    │   │   ├─ [524] AddressesRegistry::boldToken() [staticcall]
+    │   │   │   └─ ← [Return] BoldToken: [0xF7cF6242ce47eB2995FB246eD5eabb6E835510C5]
+    │   │   ├─ emit TroveManagerAddressChanged(_newTroveManagerAddress: TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648])
+    │   │   ├─ emit BoldTokenAddressChanged(_boldTokenAddress: BoldToken: [0xF7cF6242ce47eB2995FB246eD5eabb6E835510C5])
+    │   │   └─ ← [Return] 7542 bytes of code
+    │   └─ ← [Return] 0x9b73e6b79070dc5b269cf3a3c8cf23291d98222d
+    ├─ [1254712] Create2Deployer::create2()
+    │   ├─ [1219729] → new ActivePool@0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225
+    │   │   ├─ [392] AddressesRegistry::collToken() [staticcall]
+    │   │   │   └─ ← [Return] 0x31049849CCdD983D8F401077537438eaF12B12Af
+    │   │   ├─ [568] AddressesRegistry::borrowerOperations() [staticcall]
+    │   │   │   └─ ← [Return] BorrowerOperations: [0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d]
+    │   │   ├─ [458] AddressesRegistry::troveManager() [staticcall]
+    │   │   │   └─ ← [Return] TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648]
+    │   │   ├─ [268] AddressesRegistry::stabilityPool() [staticcall]
+    │   │   │   └─ ← [Return] StabilityPool: [0x9B73e6b79070DC5B269Cf3a3C8cf23291D98222D]
+    │   │   ├─ [436] AddressesRegistry::defaultPool() [staticcall]
+    │   │   │   └─ ← [Return] DefaultPool: [0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc]
+    │   │   ├─ [788] AddressesRegistry::interestRouter() [staticcall]
+    │   │   │   └─ ← [Return] MockInterestRouter: [0x04b608E82335f7a92Dff96C1B020736d7e96bC9b]
+    │   │   ├─ [524] AddressesRegistry::boldToken() [staticcall]
+    │   │   │   └─ ← [Return] BoldToken: [0xF7cF6242ce47eB2995FB246eD5eabb6E835510C5]
+    │   │   ├─ emit CollTokenAddressChanged(_newCollTokenAddress: 0x31049849CCdD983D8F401077537438eaF12B12Af)
+    │   │   ├─ emit BorrowerOperationsAddressChanged(_newBorrowerOperationsAddress: BorrowerOperations: [0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d])
+    │   │   ├─ emit TroveManagerAddressChanged(_newTroveManagerAddress: TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648])
+    │   │   ├─ emit StabilityPoolAddressChanged(_newStabilityPoolAddress: StabilityPool: [0x9B73e6b79070DC5B269Cf3a3C8cf23291D98222D])
+    │   │   ├─ emit DefaultPoolAddressChanged(_newDefaultPoolAddress: DefaultPool: [0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc])
+    │   │   ├─ [25247] 0x31049849CCdD983D8F401077537438eaF12B12Af::approve(DefaultPool: [0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc], 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    │   │   │   ├─ [24851] 0x58ea2Bb193B1429Cb90D24195E6ac4Ccb0B27a12::approve(DefaultPool: [0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc], 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77]) [delegatecall]
+    │   │   │   │   ├─ emit Approval(owner: ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225], spender: DefaultPool: [0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc], value: 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    │   │   │   │   └─ ← [Return] true
+    │   │   │   └─ ← [Return] true
+    │   │   └─ ← [Return] 5902 bytes of code
+    │   └─ ← [Return] 0xdc3e9d306ee66e8baae4b5c35c9b69e8212e9225
+    ├─ [473818] Create2Deployer::create2()
+    │   ├─ [440629] → new DefaultPool@0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc
+    │   │   ├─ [392] AddressesRegistry::collToken() [staticcall]
+    │   │   │   └─ ← [Return] 0x31049849CCdD983D8F401077537438eaF12B12Af
+    │   │   ├─ [458] AddressesRegistry::troveManager() [staticcall]
+    │   │   │   └─ ← [Return] TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648]
+    │   │   ├─ [634] AddressesRegistry::activePool() [staticcall]
+    │   │   │   └─ ← [Return] ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225]
+    │   │   ├─ emit CollTokenAddressChanged(_newCollTokenAddress: 0x31049849CCdD983D8F401077537438eaF12B12Af)
+    │   │   ├─ emit TroveManagerAddressChanged(_newTroveManagerAddress: TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648])
+    │   │   ├─ emit ActivePoolAddressChanged(_activePoolAddress: ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225])
+    │   │   ├─ [25247] 0x31049849CCdD983D8F401077537438eaF12B12Af::approve(ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225], 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    │   │   │   ├─ [24851] 0x58ea2Bb193B1429Cb90D24195E6ac4Ccb0B27a12::approve(ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225], 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77]) [delegatecall]
+    │   │   │   │   ├─ emit Approval(owner: DefaultPool: [0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc], spender: ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225], value: 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    │   │   │   │   └─ ← [Return] true
+    │   │   │   └─ ← [Return] true
+    │   │   └─ ← [Return] 2041 bytes of code
+    │   └─ ← [Return] 0xb1cb78366322d0ed859690d43ea56b9e140fa9bc
+    ├─ [434654] Create2Deployer::create2()
+    │   ├─ [401564] → new CollSurplusPool@0x3957269f97A7223857066597651dd29E8D949b02
+    │   │   ├─ [392] AddressesRegistry::collToken() [staticcall]
+    │   │   │   └─ ← [Return] 0x31049849CCdD983D8F401077537438eaF12B12Af
+    │   │   ├─ [568] AddressesRegistry::borrowerOperations() [staticcall]
+    │   │   │   └─ ← [Return] BorrowerOperations: [0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d]
+    │   │   ├─ [458] AddressesRegistry::troveManager() [staticcall]
+    │   │   │   └─ ← [Return] TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648]
+    │   │   ├─ emit BorrowerOperationsAddressChanged(_newBorrowerOperationsAddress: BorrowerOperations: [0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d])
+    │   │   ├─ emit TroveManagerAddressChanged(_newTroveManagerAddress: TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648])
+    │   │   └─ ← [Return] 1980 bytes of code
+    │   └─ ← [Return] 0x3957269f97a7223857066597651dd29e8d949b02
+    ├─ [1292202] Create2Deployer::create2()
+    │   ├─ [1257438] → new SortedTroves@0xF0b030DBa4C00661b6883a6fDa25C2B65EB80091
+    │   │   ├─ [458] AddressesRegistry::troveManager() [staticcall]
+    │   │   │   └─ ← [Return] TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648]
+    │   │   ├─ [568] AddressesRegistry::borrowerOperations() [staticcall]
+    │   │   │   └─ ← [Return] BorrowerOperations: [0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d]
+    │   │   ├─ emit TroveManagerAddressChanged(_newTroveManagerAddress: TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648])
+    │   │   ├─ emit BorrowerOperationsAddressChanged(_newBorrowerOperationsAddress: BorrowerOperations: [0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d])
+    │   │   └─ ← [Return] 6236 bytes of code
+    │   └─ ← [Return] 0xf0b030dba4c00661b6883a6fda25c2b65eb80091
+    ├─ [99568] Create2Deployer::create2()
+    │   ├─ [67198] → new GasPool@0x043237E4E06dEB9214c7b8CD0fC1AA46bF6c1E06
+    │   │   ├─ [722] AddressesRegistry::WETH()
+    │   │   │   └─ ← [Return] 0x9Dc08C6e2BF0F1eeD1E00670f80Df39145529F81
+    │   │   ├─ [568] AddressesRegistry::borrowerOperations() [staticcall]
+    │   │   │   └─ ← [Return] BorrowerOperations: [0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d]
+    │   │   ├─ [458] AddressesRegistry::troveManager() [staticcall]
+    │   │   │   └─ ← [Return] TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648]
+    │   │   ├─ [24400] 0x9Dc08C6e2BF0F1eeD1E00670f80Df39145529F81::approve(BorrowerOperations: [0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d], 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    │   │   │   ├─ emit Approval(owner: GasPool: [0x043237E4E06dEB9214c7b8CD0fC1AA46bF6c1E06], spender: BorrowerOperations: [0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d], value: 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    │   │   │   └─ ← [Return] true
+    │   │   ├─ [24400] 0x9Dc08C6e2BF0F1eeD1E00670f80Df39145529F81::approve(TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648], 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    │   │   │   ├─ emit Approval(owner: GasPool: [0x043237E4E06dEB9214c7b8CD0fC1AA46bF6c1E06], spender: TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648], value: 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    │   │   │   └─ ← [Return] true
+    │   │   └─ ← [Return] 58 bytes of code
+    │   └─ ← [Return] 0x043237e4e06deb9214c7b8cd0fc1aa46bf6c1e06
+    ├─ [0] console::log("deploying pyth price feed") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [454443] Create2Deployer::create2()
+    │   ├─ [421254] → new PythWTAOPriceFeed@0x951644aAa55EBF6F3E0823B8Ec5505324Fb256eA
+    │   │   ├─ [11696] PythAggregatorV3::decimals() [staticcall]
+    │   │   │   ├─ [8042] 0x2880aB155794e7179c9eE2e38200202908C17B43::getPriceUnsafe(0x410f41de235f2db824e562ea7ab2d3d3d4ff048316c61d629c0b93f58584e1af) [staticcall]
+    │   │   │   │   ├─ [3132] 0xA2aa501b19aff244D90cc15a4Cf739D2725B5729::getPriceUnsafe(0x410f41de235f2db824e562ea7ab2d3d3d4ff048316c61d629c0b93f58584e1af) [delegatecall]
+    │   │   │   │   │   └─ ← [Return] Price({ price: 44280762675 [4.428e10], conf: 50414901 [5.041e7], expo: -8, publishTime: 1760911443 [1.76e9] })
+    │   │   │   │   └─ ← [Return] Price({ price: 44280762675 [4.428e10], conf: 50414901 [5.041e7], expo: -8, publishTime: 1760911443 [1.76e9] })
+    │   │   │   └─ ← [Return] 8
+    │   │   ├─ [2993] PythAggregatorV3::latestRoundData() [staticcall]
+    │   │   │   ├─ [1542] 0x2880aB155794e7179c9eE2e38200202908C17B43::getPriceUnsafe(0x410f41de235f2db824e562ea7ab2d3d3d4ff048316c61d629c0b93f58584e1af) [staticcall]
+    │   │   │   │   ├─ [1132] 0xA2aa501b19aff244D90cc15a4Cf739D2725B5729::getPriceUnsafe(0x410f41de235f2db824e562ea7ab2d3d3d4ff048316c61d629c0b93f58584e1af) [delegatecall]
+    │   │   │   │   │   └─ ← [Return] Price({ price: 44280762675 [4.428e10], conf: 50414901 [5.041e7], expo: -8, publishTime: 1760911443 [1.76e9] })
+    │   │   │   │   └─ ← [Return] Price({ price: 44280762675 [4.428e10], conf: 50414901 [5.041e7], expo: -8, publishTime: 1760911443 [1.76e9] })
+    │   │   │   └─ ← [Return] 1760911443 [1.76e9], 44280762675 [4.428e10], 1760911443 [1.76e9], 1760911443 [1.76e9], 1760911443 [1.76e9]
+    │   │   └─ ← [Return] 1453 bytes of code
+    │   └─ ← [Return] 0x951644aaa55ebf6f3e0823b8ec5505324fb256ea
+    ├─ [43786] Create2Deployer::create2()
+    │   ├─ [11669] → new MockInterestRouter@0x04b608E82335f7a92Dff96C1B020736d7e96bC9b
+    │   │   └─ ← [Return] 58 bytes of code
+    │   └─ ← [Return] 0x04b608e82335f7a92dff96c1b020736d7e96bc9b
+    ├─ [993582] Create2Deployer::create2()
+    │   ├─ [958870] → new CollateralRegistry@0xe53De4925595C758af0692ae88b3a6c600E6d6cB
+    │   │   ├─ emit BaseRateUpdated(_baseRate: 1000000000000000000 [1e18])
+    │   │   └─ ← [Return] 4547 bytes of code
+    │   └─ ← [Return] 0xe53de4925595c758af0692ae88b3a6c600e6d6cb
+    ├─ [1419066] Create2Deployer::create2()
+    │   ├─ [1384199] → new HintHelpers@0xaD2A3b7c2DCeE5A2Aa67eF467a488c05AF6cbF0F
+    │   │   └─ ← [Return] 6912 bytes of code
+    │   └─ ← [Return] 0xad2a3b7c2dcee5a2aa67ef467a488c05af6cbf0f
+    ├─ [809902] Create2Deployer::create2()
+    │   ├─ [776266] → new MultiTroveGetter@0xAc9692399E6DEfDEef2ACBB2D2B088D28f84280a
+    │   │   └─ ← [Return] 3876 bytes of code
+    │   └─ ← [Return] 0xac9692399e6defdeef2acbb2d2b088d28f84280a
+    ├─ [647958] Create2Deployer::create2()
+    │   ├─ [614608] → new DebtInFrontHelper@0x2177fc4d216E79b89b35dE4551B65C608aa53E25
+    │   │   └─ ← [Return] 3068 bytes of code
+    │   └─ ← [Return] 0x2177fc4d216e79b89b35de4551b65c608aa53e25
+    ├─ [0] console::log("All contracts deployed successfully with CREATE2 addresses") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("=== Deployment Summary ===") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("BoldToken:", BoldToken: [0xF7cF6242ce47eB2995FB246eD5eabb6E835510C5]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("AddressesRegistry:", AddressesRegistry: [0xb7A79D2AB56AdF2d1977262dF96FE654c3669d03]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("BorrowerOperations:", BorrowerOperations: [0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("TroveManager:", TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("TroveNFT:", TroveNFT: [0x56CAc7490661CE88D9c1B2fd3bD7b4c469205fBE]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("StabilityPool:", StabilityPool: [0x9B73e6b79070DC5B269Cf3a3C8cf23291D98222D]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("ActivePool:", ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("DefaultPool:", DefaultPool: [0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("CollSurplusPool:", CollSurplusPool: [0x3957269f97A7223857066597651dd29E8D949b02]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("SortedTroves:", SortedTroves: [0xF0b030DBa4C00661b6883a6fDa25C2B65EB80091]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("GasPool:", GasPool: [0x043237E4E06dEB9214c7b8CD0fC1AA46bF6c1E06]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("PriceFeed:", PythWTAOPriceFeed: [0x951644aAa55EBF6F3E0823B8Ec5505324Fb256eA]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("InterestRouter:", MockInterestRouter: [0x04b608E82335f7a92Dff96C1B020736d7e96bC9b]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("CollateralRegistry:", CollateralRegistry: [0xe53De4925595C758af0692ae88b3a6c600E6d6cB]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("HintHelpers:", HintHelpers: [0xaD2A3b7c2DCeE5A2Aa67eF467a488c05AF6cbF0F]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("MultiTroveGetter:", MultiTroveGetter: [0xAc9692399E6DEfDEef2ACBB2D2B088D28f84280a]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("DebtInFrontHelper:", DebtInFrontHelper: [0x2177fc4d216E79b89b35dE4551B65C608aa53E25]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::stopBroadcast()
+    │   └─ ← [Return]
+    └─ ← [Return]
+
+
+Script ran successfully.
+
+== Logs ==
+  Deploying Tao Liquity contracts...
+  AddressesRegistry populated with all premined addresses
+  deploying pyth price feed
+  All contracts deployed successfully with CREATE2 addresses
+  === Deployment Summary ===
+  BoldToken: 0xF7cF6242ce47eB2995FB246eD5eabb6E835510C5
+  AddressesRegistry: 0xb7A79D2AB56AdF2d1977262dF96FE654c3669d03
+  BorrowerOperations: 0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d
+  TroveManager: 0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648
+  TroveNFT: 0x56CAc7490661CE88D9c1B2fd3bD7b4c469205fBE
+  StabilityPool: 0x9B73e6b79070DC5B269Cf3a3C8cf23291D98222D
+  ActivePool: 0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225
+  DefaultPool: 0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc
+  CollSurplusPool: 0x3957269f97A7223857066597651dd29E8D949b02
+  SortedTroves: 0xF0b030DBa4C00661b6883a6fDa25C2B65EB80091
+  GasPool: 0x043237E4E06dEB9214c7b8CD0fC1AA46bF6c1E06
+  PriceFeed: 0x951644aAa55EBF6F3E0823B8Ec5505324Fb256eA
+  InterestRouter: 0x04b608E82335f7a92Dff96C1B020736d7e96bC9b
+  CollateralRegistry: 0xe53De4925595C758af0692ae88b3a6c600E6d6cB
+  HintHelpers: 0xaD2A3b7c2DCeE5A2Aa67eF467a488c05AF6cbF0F
+  MultiTroveGetter: 0xAc9692399E6DEfDEef2ACBB2D2B088D28f84280a
+  DebtInFrontHelper: 0x2177fc4d216E79b89b35dE4551B65C608aa53E25
+
+## Setting up 1 EVM.
+==========================
+Simulated On-chain Traces:
+
+  [484141] → new PythAggregatorV3@0x5FbDB2315678afecb367f032d93F642f64180aa3
+    └─ ← [Return] 2196 bytes of code
+
+  [779669] Create2Deployer::create2()
+    ├─ [745883] → new AddressesRegistry@0xb7A79D2AB56AdF2d1977262dF96FE654c3669d03
+    │   ├─ emit OwnershipTransferred(previousOwner: 0x0000000000000000000000000000000000000000, newOwner: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266)
+    │   └─ ← [Return] 3603 bytes of code
+    └─ ← [Return] 0xb7a79d2ab56adf2d1977262df96fe654c3669d03
+
+  [346072] AddressesRegistry::setAddresses(AddressVars({ collToken: 0x31049849CCdD983D8F401077537438eaF12B12Af, borrowerOperations: 0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d, troveManager: 0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648, troveNFT: 0x56CAc7490661CE88D9c1B2fd3bD7b4c469205fBE, metadataNFT: 0x0000000000000000000000000000000000000000, stabilityPool: 0x9B73e6b79070DC5B269Cf3a3C8cf23291D98222D, priceFeed: 0x951644aAa55EBF6F3E0823B8Ec5505324Fb256eA, activePool: 0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225, defaultPool: 0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc, gasPoolAddress: 0x043237E4E06dEB9214c7b8CD0fC1AA46bF6c1E06, collSurplusPool: 0x3957269f97A7223857066597651dd29E8D949b02, sortedTroves: 0xF0b030DBa4C00661b6883a6fDa25C2B65EB80091, interestRouter: 0x04b608E82335f7a92Dff96C1B020736d7e96bC9b, hintHelpers: 0x0000000000000000000000000000000000000000, multiTroveGetter: 0x0000000000000000000000000000000000000000, collateralRegistry: 0x0000000000000000000000000000000000000000, boldToken: 0xF7cF6242ce47eB2995FB246eD5eabb6E835510C5, WETH: 0x9Dc08C6e2BF0F1eeD1E00670f80Df39145529F81 }))
+    ├─ emit CollTokenAddressChanged(_newCollTokenAddress: 0x31049849CCdD983D8F401077537438eaF12B12Af)
+    ├─ emit BorrowerOperationsAddressChanged(_newBorrowerOperationsAddress: BorrowerOperations: [0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d])
+    ├─ emit TroveManagerAddressChanged(_newTroveManagerAddress: TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648])
+    ├─ emit TroveNFTAddressChanged(_newTroveNFTAddress: TroveNFT: [0x56CAc7490661CE88D9c1B2fd3bD7b4c469205fBE])
+    ├─ emit MetadataNFTAddressChanged(_metadataNFTAddress: 0x0000000000000000000000000000000000000000)
+    ├─ emit StabilityPoolAddressChanged(_newStabilityPoolAddress: StabilityPool: [0x9B73e6b79070DC5B269Cf3a3C8cf23291D98222D])
+    ├─ emit PriceFeedAddressChanged(_priceFeedAddress: PythWTAOPriceFeed: [0x951644aAa55EBF6F3E0823B8Ec5505324Fb256eA])
+    ├─ emit ActivePoolAddressChanged(_activePoolAddress: ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225])
+    ├─ emit DefaultPoolAddressChanged(_newDefaultPoolAddress: DefaultPool: [0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc])
+    ├─ emit GasPoolAddressChanged(_gasPoolAddress: GasPool: [0x043237E4E06dEB9214c7b8CD0fC1AA46bF6c1E06])
+    ├─ emit CollSurplusPoolAddressChanged(_collSurplusPoolAddress: CollSurplusPool: [0x3957269f97A7223857066597651dd29E8D949b02])
+    ├─ emit SortedTrovesAddressChanged(_sortedTrovesAddress: SortedTroves: [0xF0b030DBa4C00661b6883a6fDa25C2B65EB80091])
+    ├─ emit InterestRouterAddressChanged(_interestRouterAddress: MockInterestRouter: [0x04b608E82335f7a92Dff96C1B020736d7e96bC9b])
+    ├─ emit HintHelpersAddressChanged(_hintHelpersAddress: 0x0000000000000000000000000000000000000000)
+    ├─ emit MultiTroveGetterAddressChanged(_multiTroveGetterAddress: 0x0000000000000000000000000000000000000000)
+    ├─ emit CollateralRegistryAddressChanged(_collateralRegistryAddress: 0x0000000000000000000000000000000000000000)
+    ├─ emit BoldTokenAddressChanged(_boldTokenAddress: BoldToken: [0xF7cF6242ce47eB2995FB246eD5eabb6E835510C5])
+    ├─ emit WETHAddressChanged(_wethAddress: 0x9Dc08C6e2BF0F1eeD1E00670f80Df39145529F81)
+    ├─ emit OwnershipTransferred(previousOwner: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266, newOwner: 0x0000000000000000000000000000000000000000)
+    └─ ← [Stop]
+
+  [1385262] Create2Deployer::create2()
+    ├─ [1349825] → new BoldToken@0xF7cF6242ce47eB2995FB246eD5eabb6E835510C5
+    │   ├─ emit OwnershipTransferred(previousOwner: 0x0000000000000000000000000000000000000000, newOwner: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266)
+    │   └─ ← [Return] 6392 bytes of code
+    └─ ← [Return] 0xf7cf6242ce47eb2995fb246ed5eabb6e835510c5
+
+  [6115232] Create2Deployer::create2()
+    ├─ [6069310] → new BorrowerOperations@0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d
+    │   ├─ [2634] AddressesRegistry::activePool() [staticcall]
+    │   │   └─ ← [Return] ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225]
+    │   ├─ [2436] AddressesRegistry::defaultPool() [staticcall]
+    │   │   └─ ← [Return] DefaultPool: [0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc]
+    │   ├─ [2546] AddressesRegistry::priceFeed() [staticcall]
+    │   │   └─ ← [Return] PythWTAOPriceFeed: [0x951644aAa55EBF6F3E0823B8Ec5505324Fb256eA]
+    │   ├─ emit ActivePoolAddressChanged(_activePoolAddress: ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225])
+    │   ├─ emit DefaultPoolAddressChanged(_newDefaultPoolAddress: DefaultPool: [0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc])
+    │   ├─ emit PriceFeedAddressChanged(_priceFeedAddress: PythWTAOPriceFeed: [0x951644aAa55EBF6F3E0823B8Ec5505324Fb256eA])
+    │   ├─ [2304] AddressesRegistry::troveNFT() [staticcall]
+    │   │   └─ ← [Return] TroveNFT: [0x56CAc7490661CE88D9c1B2fd3bD7b4c469205fBE]
+    │   ├─ emit TroveNFTAddressChanged(_newTroveNFTAddress: TroveNFT: [0x56CAc7490661CE88D9c1B2fd3bD7b4c469205fBE])
+    │   ├─ [2392] AddressesRegistry::collToken() [staticcall]
+    │   │   └─ ← [Return] 0x31049849CCdD983D8F401077537438eaF12B12Af
+    │   ├─ [2722] AddressesRegistry::WETH()
+    │   │   └─ ← [Return] 0x9Dc08C6e2BF0F1eeD1E00670f80Df39145529F81
+    │   ├─ [353] AddressesRegistry::CCR()
+    │   │   └─ ← [Return] 1500000000000000000 [1.5e18]
+    │   ├─ [375] AddressesRegistry::SCR()
+    │   │   └─ ← [Return] 1300000000000000000 [1.3e18]
+    │   ├─ [485] AddressesRegistry::MCR()
+    │   │   └─ ← [Return] 1100000000000000000 [1.1e18]
+    │   ├─ [529] AddressesRegistry::BCR()
+    │   │   └─ ← [Return] 100000000000000000 [1e17]
+    │   ├─ [2458] AddressesRegistry::troveManager() [staticcall]
+    │   │   └─ ← [Return] TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648]
+    │   ├─ [2851] AddressesRegistry::gasPoolAddress() [staticcall]
+    │   │   └─ ← [Return] GasPool: [0x043237E4E06dEB9214c7b8CD0fC1AA46bF6c1E06]
+    │   ├─ [2766] AddressesRegistry::collSurplusPool() [staticcall]
+    │   │   └─ ← [Return] CollSurplusPool: [0x3957269f97A7223857066597651dd29E8D949b02]
+    │   ├─ [2744] AddressesRegistry::sortedTroves() [staticcall]
+    │   │   └─ ← [Return] SortedTroves: [0xF0b030DBa4C00661b6883a6fDa25C2B65EB80091]
+    │   ├─ [2524] AddressesRegistry::boldToken() [staticcall]
+    │   │   └─ ← [Return] BoldToken: [0xF7cF6242ce47eB2995FB246eD5eabb6E835510C5]
+    │   ├─ emit TroveManagerAddressChanged(_newTroveManagerAddress: TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648])
+    │   ├─ emit GasPoolAddressChanged(_gasPoolAddress: GasPool: [0x043237E4E06dEB9214c7b8CD0fC1AA46bF6c1E06])
+    │   ├─ emit CollSurplusPoolAddressChanged(_collSurplusPoolAddress: CollSurplusPool: [0x3957269f97A7223857066597651dd29E8D949b02])
+    │   ├─ emit SortedTrovesAddressChanged(_sortedTrovesAddress: SortedTroves: [0xF0b030DBa4C00661b6883a6fDa25C2B65EB80091])
+    │   ├─ emit BoldTokenAddressChanged(_boldTokenAddress: BoldToken: [0xF7cF6242ce47eB2995FB246eD5eabb6E835510C5])
+    │   ├─ [29747] 0x31049849CCdD983D8F401077537438eaF12B12Af::approve(ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225], 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    │   │   ├─ [24851] 0x58ea2Bb193B1429Cb90D24195E6ac4Ccb0B27a12::approve(ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225], 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77]) [delegatecall]
+    │   │   │   ├─ emit Approval(owner: BorrowerOperations: [0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d], spender: ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225], value: 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    │   │   │   └─ ← [Return] true
+    │   │   └─ ← [Return] true
+    │   └─ ← [Return] 29016 bytes of code
+    └─ ← [Return] 0x992f2d8434acdbe1e0aa3de2b45844df24ff9d2d
+
+  [5487603] Create2Deployer::create2()
+    ├─ [5443295] → new TroveManager@0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648
+    │   ├─ [2634] AddressesRegistry::activePool() [staticcall]
+    │   │   └─ ← [Return] ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225]
+    │   ├─ [2436] AddressesRegistry::defaultPool() [staticcall]
+    │   │   └─ ← [Return] DefaultPool: [0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc]
+    │   ├─ [2546] AddressesRegistry::priceFeed() [staticcall]
+    │   │   └─ ← [Return] PythWTAOPriceFeed: [0x951644aAa55EBF6F3E0823B8Ec5505324Fb256eA]
+    │   ├─ emit ActivePoolAddressChanged(_activePoolAddress: ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225])
+    │   ├─ emit DefaultPoolAddressChanged(_newDefaultPoolAddress: DefaultPool: [0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc])
+    │   ├─ emit PriceFeedAddressChanged(_priceFeedAddress: PythWTAOPriceFeed: [0x951644aAa55EBF6F3E0823B8Ec5505324Fb256eA])
+    │   ├─ [353] AddressesRegistry::CCR()
+    │   │   └─ ← [Return] 1500000000000000000 [1.5e18]
+    │   ├─ [485] AddressesRegistry::MCR()
+    │   │   └─ ← [Return] 1100000000000000000 [1.1e18]
+    │   ├─ [375] AddressesRegistry::SCR()
+    │   │   └─ ← [Return] 1300000000000000000 [1.3e18]
+    │   ├─ [287] AddressesRegistry::LIQUIDATION_PENALTY_SP()
+    │   │   └─ ← [Return] 50000000000000000 [5e16]
+    │   ├─ [221] AddressesRegistry::LIQUIDATION_PENALTY_REDISTRIBUTION()
+    │   │   └─ ← [Return] 50000000000000000 [5e16]
+    │   ├─ [2304] AddressesRegistry::troveNFT() [staticcall]
+    │   │   └─ ← [Return] TroveNFT: [0x56CAc7490661CE88D9c1B2fd3bD7b4c469205fBE]
+    │   ├─ [2568] AddressesRegistry::borrowerOperations() [staticcall]
+    │   │   └─ ← [Return] BorrowerOperations: [0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d]
+    │   ├─ [2268] AddressesRegistry::stabilityPool() [staticcall]
+    │   │   └─ ← [Return] StabilityPool: [0x9B73e6b79070DC5B269Cf3a3C8cf23291D98222D]
+    │   ├─ [2851] AddressesRegistry::gasPoolAddress() [staticcall]
+    │   │   └─ ← [Return] GasPool: [0x043237E4E06dEB9214c7b8CD0fC1AA46bF6c1E06]
+    │   ├─ [2766] AddressesRegistry::collSurplusPool() [staticcall]
+    │   │   └─ ← [Return] CollSurplusPool: [0x3957269f97A7223857066597651dd29E8D949b02]
+    │   ├─ [2524] AddressesRegistry::boldToken() [staticcall]
+    │   │   └─ ← [Return] BoldToken: [0xF7cF6242ce47eB2995FB246eD5eabb6E835510C5]
+    │   ├─ [2744] AddressesRegistry::sortedTroves() [staticcall]
+    │   │   └─ ← [Return] SortedTroves: [0xF0b030DBa4C00661b6883a6fDa25C2B65EB80091]
+    │   ├─ [2722] AddressesRegistry::WETH()
+    │   │   └─ ← [Return] 0x9Dc08C6e2BF0F1eeD1E00670f80Df39145529F81
+    │   ├─ [2810] AddressesRegistry::collateralRegistry() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ emit TroveNFTAddressChanged(_newTroveNFTAddress: TroveNFT: [0x56CAc7490661CE88D9c1B2fd3bD7b4c469205fBE])
+    │   ├─ emit BorrowerOperationsAddressChanged(_newBorrowerOperationsAddress: BorrowerOperations: [0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d])
+    │   ├─ emit StabilityPoolAddressChanged(_newStabilityPoolAddress: StabilityPool: [0x9B73e6b79070DC5B269Cf3a3C8cf23291D98222D])
+    │   ├─ emit GasPoolAddressChanged(_gasPoolAddress: GasPool: [0x043237E4E06dEB9214c7b8CD0fC1AA46bF6c1E06])
+    │   ├─ emit CollSurplusPoolAddressChanged(_collSurplusPoolAddress: CollSurplusPool: [0x3957269f97A7223857066597651dd29E8D949b02])
+    │   ├─ emit BoldTokenAddressChanged(_boldTokenAddress: BoldToken: [0xF7cF6242ce47eB2995FB246eD5eabb6E835510C5])
+    │   ├─ emit SortedTrovesAddressChanged(_sortedTrovesAddress: SortedTroves: [0xF0b030DBa4C00661b6883a6fDa25C2B65EB80091])
+    │   ├─ emit CollateralRegistryAddressChanged(_collateralRegistryAddress: 0x0000000000000000000000000000000000000000)
+    │   └─ ← [Return] 25793 bytes of code
+    └─ ← [Return] 0x18c9e8d3b243e6ba4d537cb5b99dd587a0232648
+
+  [1147063] Create2Deployer::create2()
+    ├─ [1112196] → new TroveNFT@0x56CAc7490661CE88D9c1B2fd3bD7b4c469205fBE
+    │   ├─ [2392] AddressesRegistry::collToken() [staticcall]
+    │   │   └─ ← [Return] 0x31049849CCdD983D8F401077537438eaF12B12Af
+    │   ├─ [8257] 0x31049849CCdD983D8F401077537438eaF12B12Af::name() [staticcall]
+    │   │   ├─ [3361] 0x58ea2Bb193B1429Cb90D24195E6ac4Ccb0B27a12::name() [delegatecall]
+    │   │   │   └─ ← [Return] "Virtual TAO"
+    │   │   └─ ← [Return] "Virtual TAO"
+    │   ├─ [392] AddressesRegistry::collToken() [staticcall]
+    │   │   └─ ← [Return] 0x31049849CCdD983D8F401077537438eaF12B12Af
+    │   ├─ [3812] 0x31049849CCdD983D8F401077537438eaF12B12Af::symbol() [staticcall]
+    │   │   ├─ [3416] 0x58ea2Bb193B1429Cb90D24195E6ac4Ccb0B27a12::symbol() [delegatecall]
+    │   │   │   └─ ← [Return] "vTAO"
+    │   │   └─ ← [Return] "vTAO"
+    │   ├─ [2458] AddressesRegistry::troveManager() [staticcall]
+    │   │   └─ ← [Return] TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648]
+    │   ├─ [392] AddressesRegistry::collToken() [staticcall]
+    │   │   └─ ← [Return] 0x31049849CCdD983D8F401077537438eaF12B12Af
+    │   ├─ [2832] AddressesRegistry::metadataNFT() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ [2524] AddressesRegistry::boldToken() [staticcall]
+    │   │   └─ ← [Return] BoldToken: [0xF7cF6242ce47eB2995FB246eD5eabb6E835510C5]
+    │   └─ ← [Return] 5164 bytes of code
+    └─ ← [Return] 0x56cac7490661ce88d9c1b2fd3bd7b4c469205fbe
+
+  [1659798] Create2Deployer::create2()
+    ├─ [1624257] → new StabilityPool@0x9B73e6b79070DC5B269Cf3a3C8cf23291D98222D
+    │   ├─ [2634] AddressesRegistry::activePool() [staticcall]
+    │   │   └─ ← [Return] ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225]
+    │   ├─ [2436] AddressesRegistry::defaultPool() [staticcall]
+    │   │   └─ ← [Return] DefaultPool: [0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc]
+    │   ├─ [2546] AddressesRegistry::priceFeed() [staticcall]
+    │   │   └─ ← [Return] PythWTAOPriceFeed: [0x951644aAa55EBF6F3E0823B8Ec5505324Fb256eA]
+    │   ├─ emit ActivePoolAddressChanged(_activePoolAddress: ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225])
+    │   ├─ emit DefaultPoolAddressChanged(_newDefaultPoolAddress: DefaultPool: [0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc])
+    │   ├─ emit PriceFeedAddressChanged(_priceFeedAddress: PythWTAOPriceFeed: [0x951644aAa55EBF6F3E0823B8Ec5505324Fb256eA])
+    │   ├─ [2392] AddressesRegistry::collToken() [staticcall]
+    │   │   └─ ← [Return] 0x31049849CCdD983D8F401077537438eaF12B12Af
+    │   ├─ [2458] AddressesRegistry::troveManager() [staticcall]
+    │   │   └─ ← [Return] TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648]
+    │   ├─ [2524] AddressesRegistry::boldToken() [staticcall]
+    │   │   └─ ← [Return] BoldToken: [0xF7cF6242ce47eB2995FB246eD5eabb6E835510C5]
+    │   ├─ emit TroveManagerAddressChanged(_newTroveManagerAddress: TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648])
+    │   ├─ emit BoldTokenAddressChanged(_boldTokenAddress: BoldToken: [0xF7cF6242ce47eB2995FB246eD5eabb6E835510C5])
+    │   └─ ← [Return] 7542 bytes of code
+    └─ ← [Return] 0x9b73e6b79070dc5b269cf3a3c8cf23291d98222d
+
+  [1278212] Create2Deployer::create2()
+    ├─ [1243229] → new ActivePool@0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225
+    │   ├─ [2392] AddressesRegistry::collToken() [staticcall]
+    │   │   └─ ← [Return] 0x31049849CCdD983D8F401077537438eaF12B12Af
+    │   ├─ [2568] AddressesRegistry::borrowerOperations() [staticcall]
+    │   │   └─ ← [Return] BorrowerOperations: [0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d]
+    │   ├─ [2458] AddressesRegistry::troveManager() [staticcall]
+    │   │   └─ ← [Return] TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648]
+    │   ├─ [2268] AddressesRegistry::stabilityPool() [staticcall]
+    │   │   └─ ← [Return] StabilityPool: [0x9B73e6b79070DC5B269Cf3a3C8cf23291D98222D]
+    │   ├─ [2436] AddressesRegistry::defaultPool() [staticcall]
+    │   │   └─ ← [Return] DefaultPool: [0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc]
+    │   ├─ [2788] AddressesRegistry::interestRouter() [staticcall]
+    │   │   └─ ← [Return] MockInterestRouter: [0x04b608E82335f7a92Dff96C1B020736d7e96bC9b]
+    │   ├─ [2524] AddressesRegistry::boldToken() [staticcall]
+    │   │   └─ ← [Return] BoldToken: [0xF7cF6242ce47eB2995FB246eD5eabb6E835510C5]
+    │   ├─ emit CollTokenAddressChanged(_newCollTokenAddress: 0x31049849CCdD983D8F401077537438eaF12B12Af)
+    │   ├─ emit BorrowerOperationsAddressChanged(_newBorrowerOperationsAddress: BorrowerOperations: [0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d])
+    │   ├─ emit TroveManagerAddressChanged(_newTroveManagerAddress: TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648])
+    │   ├─ emit StabilityPoolAddressChanged(_newStabilityPoolAddress: StabilityPool: [0x9B73e6b79070DC5B269Cf3a3C8cf23291D98222D])
+    │   ├─ emit DefaultPoolAddressChanged(_newDefaultPoolAddress: DefaultPool: [0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc])
+    │   ├─ [29747] 0x31049849CCdD983D8F401077537438eaF12B12Af::approve(DefaultPool: [0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc], 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    │   │   ├─ [24851] 0x58ea2Bb193B1429Cb90D24195E6ac4Ccb0B27a12::approve(DefaultPool: [0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc], 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77]) [delegatecall]
+    │   │   │   ├─ emit Approval(owner: ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225], spender: DefaultPool: [0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc], value: 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    │   │   │   └─ ← [Return] true
+    │   │   └─ ← [Return] true
+    │   └─ ← [Return] 5902 bytes of code
+    └─ ← [Return] 0xdc3e9d306ee66e8baae4b5c35c9b69e8212e9225
+
+  [489318] Create2Deployer::create2()
+    ├─ [456129] → new DefaultPool@0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc
+    │   ├─ [2392] AddressesRegistry::collToken() [staticcall]
+    │   │   └─ ← [Return] 0x31049849CCdD983D8F401077537438eaF12B12Af
+    │   ├─ [2458] AddressesRegistry::troveManager() [staticcall]
+    │   │   └─ ← [Return] TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648]
+    │   ├─ [2634] AddressesRegistry::activePool() [staticcall]
+    │   │   └─ ← [Return] ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225]
+    │   ├─ emit CollTokenAddressChanged(_newCollTokenAddress: 0x31049849CCdD983D8F401077537438eaF12B12Af)
+    │   ├─ emit TroveManagerAddressChanged(_newTroveManagerAddress: TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648])
+    │   ├─ emit ActivePoolAddressChanged(_activePoolAddress: ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225])
+    │   ├─ [29747] 0x31049849CCdD983D8F401077537438eaF12B12Af::approve(ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225], 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    │   │   ├─ [24851] 0x58ea2Bb193B1429Cb90D24195E6ac4Ccb0B27a12::approve(ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225], 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77]) [delegatecall]
+    │   │   │   ├─ emit Approval(owner: DefaultPool: [0xB1CB78366322D0eD859690D43Ea56B9e140Fa9bc], spender: ActivePool: [0xdC3E9D306ee66e8BaAE4B5c35c9b69e8212E9225], value: 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    │   │   │   └─ ← [Return] true
+    │   │   └─ ← [Return] true
+    │   └─ ← [Return] 2041 bytes of code
+    └─ ← [Return] 0xb1cb78366322d0ed859690d43ea56b9e140fa9bc
+
+  [443154] Create2Deployer::create2()
+    ├─ [410064] → new CollSurplusPool@0x3957269f97A7223857066597651dd29E8D949b02
+    │   ├─ [2392] AddressesRegistry::collToken() [staticcall]
+    │   │   └─ ← [Return] 0x31049849CCdD983D8F401077537438eaF12B12Af
+    │   ├─ [2568] AddressesRegistry::borrowerOperations() [staticcall]
+    │   │   └─ ← [Return] BorrowerOperations: [0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d]
+    │   ├─ [2458] AddressesRegistry::troveManager() [staticcall]
+    │   │   └─ ← [Return] TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648]
+    │   ├─ emit BorrowerOperationsAddressChanged(_newBorrowerOperationsAddress: BorrowerOperations: [0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d])
+    │   ├─ emit TroveManagerAddressChanged(_newTroveManagerAddress: TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648])
+    │   └─ ← [Return] 1980 bytes of code
+    └─ ← [Return] 0x3957269f97a7223857066597651dd29e8d949b02
+
+  [1298702] Create2Deployer::create2()
+    ├─ [1263938] → new SortedTroves@0xF0b030DBa4C00661b6883a6fDa25C2B65EB80091
+    │   ├─ [2458] AddressesRegistry::troveManager() [staticcall]
+    │   │   └─ ← [Return] TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648]
+    │   ├─ [2568] AddressesRegistry::borrowerOperations() [staticcall]
+    │   │   └─ ← [Return] BorrowerOperations: [0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d]
+    │   ├─ emit TroveManagerAddressChanged(_newTroveManagerAddress: TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648])
+    │   ├─ emit BorrowerOperationsAddressChanged(_newBorrowerOperationsAddress: BorrowerOperations: [0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d])
+    │   └─ ← [Return] 6236 bytes of code
+    └─ ← [Return] 0xf0b030dba4c00661b6883a6fda25c2b65eb80091
+
+  [108068] Create2Deployer::create2()
+    ├─ [75698] → new GasPool@0x043237E4E06dEB9214c7b8CD0fC1AA46bF6c1E06
+    │   ├─ [2722] AddressesRegistry::WETH()
+    │   │   └─ ← [Return] 0x9Dc08C6e2BF0F1eeD1E00670f80Df39145529F81
+    │   ├─ [2568] AddressesRegistry::borrowerOperations() [staticcall]
+    │   │   └─ ← [Return] BorrowerOperations: [0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d]
+    │   ├─ [2458] AddressesRegistry::troveManager() [staticcall]
+    │   │   └─ ← [Return] TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648]
+    │   ├─ [24400] 0x9Dc08C6e2BF0F1eeD1E00670f80Df39145529F81::approve(BorrowerOperations: [0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d], 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    │   │   ├─ emit Approval(owner: GasPool: [0x043237E4E06dEB9214c7b8CD0fC1AA46bF6c1E06], spender: BorrowerOperations: [0x992f2d8434acdBe1e0AA3De2B45844df24FF9D2d], value: 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    │   │   └─ ← [Return] true
+    │   ├─ [24400] 0x9Dc08C6e2BF0F1eeD1E00670f80Df39145529F81::approve(TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648], 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    │   │   ├─ emit Approval(owner: GasPool: [0x043237E4E06dEB9214c7b8CD0fC1AA46bF6c1E06], spender: TroveManager: [0x18c9e8d3b243E6ba4d537Cb5B99DD587a0232648], value: 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    │   │   └─ ← [Return] true
+    │   └─ ← [Return] 58 bytes of code
+    └─ ← [Return] 0x043237e4e06deb9214c7b8cd0fc1aa46bf6c1e06
+
+  [460943] Create2Deployer::create2()
+    ├─ [427754] → new PythWTAOPriceFeed@0x951644aAa55EBF6F3E0823B8Ec5505324Fb256eA
+    │   ├─ [15696] PythAggregatorV3::decimals() [staticcall]
+    │   │   ├─ [8042] 0x2880aB155794e7179c9eE2e38200202908C17B43::getPriceUnsafe(0x410f41de235f2db824e562ea7ab2d3d3d4ff048316c61d629c0b93f58584e1af) [staticcall]
+    │   │   │   ├─ [3132] 0xA2aa501b19aff244D90cc15a4Cf739D2725B5729::getPriceUnsafe(0x410f41de235f2db824e562ea7ab2d3d3d4ff048316c61d629c0b93f58584e1af) [delegatecall]
+    │   │   │   │   └─ ← [Return] Price({ price: 44280762675 [4.428e10], conf: 50414901 [5.041e7], expo: -8, publishTime: 1760911443 [1.76e9] })
+    │   │   │   └─ ← [Return] Price({ price: 44280762675 [4.428e10], conf: 50414901 [5.041e7], expo: -8, publishTime: 1760911443 [1.76e9] })
+    │   │   └─ ← [Return] 8
+    │   ├─ [2993] PythAggregatorV3::latestRoundData() [staticcall]
+    │   │   ├─ [1542] 0x2880aB155794e7179c9eE2e38200202908C17B43::getPriceUnsafe(0x410f41de235f2db824e562ea7ab2d3d3d4ff048316c61d629c0b93f58584e1af) [staticcall]
+    │   │   │   ├─ [1132] 0xA2aa501b19aff244D90cc15a4Cf739D2725B5729::getPriceUnsafe(0x410f41de235f2db824e562ea7ab2d3d3d4ff048316c61d629c0b93f58584e1af) [delegatecall]
+    │   │   │   │   └─ ← [Return] Price({ price: 44280762675 [4.428e10], conf: 50414901 [5.041e7], expo: -8, publishTime: 1760911443 [1.76e9] })
+    │   │   │   └─ ← [Return] Price({ price: 44280762675 [4.428e10], conf: 50414901 [5.041e7], expo: -8, publishTime: 1760911443 [1.76e9] })
+    │   │   └─ ← [Return] 1760911443 [1.76e9], 44280762675 [4.428e10], 1760911443 [1.76e9], 1760911443 [1.76e9], 1760911443 [1.76e9]
+    │   └─ ← [Return] 1453 bytes of code
+    └─ ← [Return] 0x951644aaa55ebf6f3e0823b8ec5505324fb256ea
+
+  [43786] Create2Deployer::create2()
+    ├─ [11669] → new MockInterestRouter@0x04b608E82335f7a92Dff96C1B020736d7e96bC9b
+    │   └─ ← [Return] 58 bytes of code
+    └─ ← [Return] 0x04b608e82335f7a92dff96c1b020736d7e96bc9b
+
+  [993582] Create2Deployer::create2()
+    ├─ [958870] → new CollateralRegistry@0xe53De4925595C758af0692ae88b3a6c600E6d6cB
+    │   ├─ emit BaseRateUpdated(_baseRate: 1000000000000000000 [1e18])
+    │   └─ ← [Return] 4547 bytes of code
+    └─ ← [Return] 0xe53de4925595c758af0692ae88b3a6c600e6d6cb
+
+  [1419066] Create2Deployer::create2()
+    ├─ [1384199] → new HintHelpers@0xaD2A3b7c2DCeE5A2Aa67eF467a488c05AF6cbF0F
+    │   └─ ← [Return] 6912 bytes of code
+    └─ ← [Return] 0xad2a3b7c2dcee5a2aa67ef467a488c05af6cbf0f
+
+  [809902] Create2Deployer::create2()
+    ├─ [776266] → new MultiTroveGetter@0xAc9692399E6DEfDEef2ACBB2D2B088D28f84280a
+    │   └─ ← [Return] 3876 bytes of code
+    └─ ← [Return] 0xac9692399e6defdeef2acbb2d2b088d28f84280a
+
+  [647958] Create2Deployer::create2()
+    ├─ [614608] → new DebtInFrontHelper@0x2177fc4d216E79b89b35dE4551B65C608aa53E25
+    │   └─ ← [Return] 3068 bytes of code
+    └─ ← [Return] 0x2177fc4d216e79b89b35de4551b65c608aa53e25
+
+
+==========================
+
+Chain 964
+
+Estimated gas price: 20.000000001 gwei
+
+Estimated total gas used for script: 39784286
+
+Estimated amount required: 0.795685720039784286 ETH
+
+==========================
+
+
+==========================
+
+ONCHAIN EXECUTION COMPLETE & SUCCESSFUL.
+
+Transactions saved to: /home/Loris/USDTau/USDTau/contracts/broadcast/DeployTaoLiquity.s.sol/964/run-latest.json
+
+Sensitive values saved to: /home/Loris/USDTau/USDTau/contracts/cache/DeployTaoLiquity.s.sol/964/run-latest.json
+

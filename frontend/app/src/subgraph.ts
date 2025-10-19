@@ -50,16 +50,17 @@ async function graphQuery<TResult, TVariables>(
   });
 
   if (response === null || !response.ok) {
-    subgraphIndicator.setError("Subgraph error: unable to fetch data.");
-    throw new Error("Error while fetching data from the subgraph");
+    // Silently handle subgraph errors - don't show error indicators or throw
+    console.warn("Subgraph error: unable to fetch data.");
+    return {} as TResult; // Return empty object to prevent crashes
   }
 
   const result = await response.json();
 
   if (!result.data) {
-    console.error(result);
-    subgraphIndicator.setError("Subgraph error: invalid response.");
-    throw new Error("Invalid response from the subgraph");
+    console.warn("Subgraph error: invalid response.", result);
+    // Silently handle invalid responses - don't show error indicators or throw
+    return {} as TResult; // Return empty object to prevent crashes
   }
 
   // successful query: clear previous indicator errors

@@ -19,6 +19,9 @@ import {TroveNFT} from "src/TroveNFT.sol";
 import {AddressesRegistry} from "src/AddressesRegistry.sol";
 import {MetadataNFT, IMetadataNFT} from "src/NFTMetadata/MetadataNFT.sol";
 import {FixedAssetReader} from "src/NFTMetadata/utils/FixedAssets.sol";
+import {HintHelpers} from "src/HintHelpers.sol";
+import {MultiTroveGetter} from "src/MultiTroveGetter.sol";
+import {DebtInFrontHelper, IDebtInFrontHelper} from "src/DebtInFrontHelper.sol";
 
 // Price feeds
 import {PythWTAOPriceFeed} from "src/PriceFeeds/PythWTAOPriceFeed.sol";
@@ -101,6 +104,10 @@ contract DeployTaoLiquity is Script {
         GasPool gasPool;
         PythWTAOPriceFeed priceFeed;
         MockInterestRouter interestRouter;
+        CollateralRegistry collateralRegistry;
+        HintHelpers hintHelpers;
+        MultiTroveGetter multiTroveGetter;
+        DebtInFrontHelper debtInFrontHelper;
     }
 
     struct PreminedAddresses {
@@ -117,6 +124,10 @@ contract DeployTaoLiquity is Script {
         address gasPool;
         address priceFeed;
         address interestRouter;
+        address collateralRegistry;
+        address hintHelpers;
+        address multiTroveGetter;
+        address debtInFrontHelper;
     }
 
     function run() external {
@@ -148,6 +159,10 @@ contract DeployTaoLiquity is Script {
         console2.log("GasPool:", address(contracts.gasPool));
         console2.log("PriceFeed:", address(contracts.priceFeed));
         console2.log("InterestRouter:", address(contracts.interestRouter));
+        console2.log("CollateralRegistry:", address(contracts.collateralRegistry));
+        console2.log("HintHelpers:", address(contracts.hintHelpers));
+        console2.log("MultiTroveGetter:", address(contracts.multiTroveGetter));
+        console2.log("DebtInFrontHelper:", address(contracts.debtInFrontHelper));
 
         vm.stopBroadcast();
     }
@@ -213,6 +228,31 @@ contract DeployTaoLiquity is Script {
         
         contracts.interestRouter = new MockInterestRouter{salt: SALT}();
         require(address(contracts.interestRouter) == addresses.interestRouter, "InterestRouter address mismatch");
+        
+        // Deploy helper contracts
+        IERC20Metadata[] memory collaterals = new IERC20Metadata[](2);
+        collaterals[0] = IERC20Metadata(WTAO_ADDRESS);
+        collaterals[1] = IERC20Metadata(VTAO_ADDRESS);
+        
+        ITroveManager[] memory troveManagers = new ITroveManager[](2);
+        troveManagers[0] = ITroveManager(addresses.troveManager);
+        troveManagers[1] = ITroveManager(addresses.troveManager); // Same trove manager for both collaterals
+        
+        contracts.collateralRegistry = new CollateralRegistry{salt: SALT}(
+            contracts.boldToken,
+            collaterals,
+            troveManagers
+        );
+        require(address(contracts.collateralRegistry) == addresses.collateralRegistry, "CollateralRegistry address mismatch");
+        
+        contracts.hintHelpers = new HintHelpers{salt: SALT}(contracts.collateralRegistry);
+        require(address(contracts.hintHelpers) == addresses.hintHelpers, "HintHelpers address mismatch");
+        
+        contracts.multiTroveGetter = new MultiTroveGetter{salt: SALT}(contracts.collateralRegistry);
+        require(address(contracts.multiTroveGetter) == addresses.multiTroveGetter, "MultiTroveGetter address mismatch");
+        
+        contracts.debtInFrontHelper = new DebtInFrontHelper{salt: SALT}(contracts.collateralRegistry, contracts.hintHelpers);
+        require(address(contracts.debtInFrontHelper) == addresses.debtInFrontHelper, "DebtInFrontHelper address mismatch");
         
         console2.log("All contracts deployed successfully with CREATE2 addresses");
         
@@ -281,6 +321,39 @@ contract DeployTaoLiquity is Script {
             abi.encode(address(deployedWTaoAggregator), 3600, vm.computeCreate2Address(SALT, keccak256(borrowerOpsBytecode)))
         );
         bytes memory interestRouterBytecode = type(MockInterestRouter).creationCode;
+        
+        // Helper contracts bytecode
+        IERC20Metadata[] memory collateralsForBytecode = new IERC20Metadata[](2);
+        collateralsForBytecode[0] = IERC20Metadata(WTAO_ADDRESS);
+        collateralsForBytecode[1] = IERC20Metadata(VTAO_ADDRESS);
+        
+        ITroveManager[] memory troveManagersForBytecode = new ITroveManager[](2);
+        troveManagersForBytecode[0] = ITroveManager(vm.computeCreate2Address(SALT, keccak256(troveManagerBytecode)));
+        troveManagersForBytecode[1] = ITroveManager(vm.computeCreate2Address(SALT, keccak256(troveManagerBytecode)));
+        
+        bytes memory collateralRegistryBytecode = abi.encodePacked(
+            type(CollateralRegistry).creationCode,
+            abi.encode(
+                vm.computeCreate2Address(SALT, keccak256(boldTokenBytecode)), // boldToken
+                collateralsForBytecode, // collaterals array with both WTAO and vTAO
+                troveManagersForBytecode // troveManagers array with both addresses
+            )
+        );
+        bytes memory hintHelpersBytecode = abi.encodePacked(
+            type(HintHelpers).creationCode,
+            abi.encode(vm.computeCreate2Address(SALT, keccak256(collateralRegistryBytecode))) // collateralRegistry
+        );
+        bytes memory multiTroveGetterBytecode = abi.encodePacked(
+            type(MultiTroveGetter).creationCode,
+            abi.encode(vm.computeCreate2Address(SALT, keccak256(collateralRegistryBytecode))) // collateralRegistry
+        );
+        bytes memory debtInFrontHelperBytecode = abi.encodePacked(
+            type(DebtInFrontHelper).creationCode,
+            abi.encode(
+                vm.computeCreate2Address(SALT, keccak256(collateralRegistryBytecode)), // collateralRegistry
+                vm.computeCreate2Address(SALT, keccak256(hintHelpersBytecode)) // hintHelpers
+            )
+        );
 
         // Compute CREATE2 addresses
         addresses.addressesRegistry = registryAddress;
@@ -296,6 +369,10 @@ contract DeployTaoLiquity is Script {
         addresses.gasPool = vm.computeCreate2Address(SALT, keccak256(gasPoolBytecode));
         addresses.priceFeed = vm.computeCreate2Address(SALT, keccak256(priceFeedBytecode));
         addresses.interestRouter = vm.computeCreate2Address(SALT, keccak256(interestRouterBytecode));
+        addresses.collateralRegistry = vm.computeCreate2Address(SALT, keccak256(collateralRegistryBytecode));
+        addresses.hintHelpers = vm.computeCreate2Address(SALT, keccak256(hintHelpersBytecode));
+        addresses.multiTroveGetter = vm.computeCreate2Address(SALT, keccak256(multiTroveGetterBytecode));
+        addresses.debtInFrontHelper = vm.computeCreate2Address(SALT, keccak256(debtInFrontHelperBytecode));
 
         return addresses;
     }
