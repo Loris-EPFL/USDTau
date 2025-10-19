@@ -12,6 +12,7 @@ import "./TestContracts/GasGuzzlerToken.sol";
 import "./TestContracts/PythDeployment.t.sol";
 import "./TestContracts/PythAggregatorV3Mock.sol";
 import "./TestContracts/ChainlinkOracleMock.sol";
+import "./TestContracts/PythOracleMock.sol";
 import "./TestContracts/VTAOPriceFeedMock.sol";
 import "./TestContracts/WTAOPriceFeedMock.sol";
 import {PythAggregatorV3} from "@pythnetwork/pyth-sdk-solidity/PythAggregatorV3.sol";
@@ -35,6 +36,7 @@ contract OraclePyth is TestAccounts {
     GasGuzzlerToken gasGuzzlerToken;
     GasGuzzlerOracle gasGuzzlerOracle;
     ChainlinkOracleMock mockOracle;
+    PythOracleMock pythOracleMock;
     VTAOPriceFeedMock vtaoPriceFeedMock;
     WTAOPriceFeedMock wtaoPriceFeedMock;
 
@@ -137,6 +139,7 @@ contract OraclePyth is TestAccounts {
         gasGuzzlerToken = new GasGuzzlerToken();
         gasGuzzlerOracle = new GasGuzzlerOracle();
         mockOracle = new ChainlinkOracleMock();
+        pythOracleMock = new PythOracleMock();
 
         // Record contracts
         for (uint256 c = 0; c < vars.numCollaterals; c++) {
@@ -183,62 +186,42 @@ contract OraclePyth is TestAccounts {
         vm.stopPrank();
     }
 
-    function etchStaleMockToVtaoOracle(bytes memory _mockOracleCode) internal {
-        // Deploy our new staleness mock
-        PythAggregatorV3Mock stalenessMock = new PythAggregatorV3Mock();
+    function etchStaleMockToVtaoOracle() internal {
+        bytes memory _mockOracleCode = address(pythOracleMock).code;
+        vm.etch(address(vtaoOracle), _mockOracleCode);
         
-        // Configure the mock to return stale data
-        stalenessMock.setDecimals(8);
-        // Fake VTAO-USD price of 500 USD
-        stalenessMock.setPrice(500e8);
-        // Make it stale by setting timestamp to 7 days ago
-        stalenessMock.setUpdatedAt(block.timestamp - 7 days);
-        
-        // Replace the pythVTaoAggregator reference with our configured mock
-        // This is the oracle that vtaoPriceFeed actually uses
-        pythVTaoAggregator = PythAggregatorV3(address(stalenessMock));
-        
-        // Also update vtaoOracle for consistency in tests that check it directly
-        vtaoOracle = PythAggregatorV3(address(stalenessMock));
+        // Configure the mock at the oracle address
+        PythOracleMock(address(vtaoOracle)).initializeStale();
     }
 
-    function etchStaleMockToWtaoOracle(bytes memory _mockOracleCode) internal {
-        // Deploy our new staleness mock
-        PythAggregatorV3Mock stalenessMock = new PythAggregatorV3Mock();
+    function etchStaleMockToWtaoOracle() internal {
+        bytes memory _mockOracleCode = address(pythOracleMock).code;
+        vm.etch(address(wtaoOracle), _mockOracleCode);
         
-        // Configure the mock to return stale data
-        stalenessMock.setDecimals(8);
-        // Fake WTAO-USD price of 500 USD
-        stalenessMock.setPrice(500e8);
-        // Make it stale by setting timestamp to 7 days ago
-        stalenessMock.setUpdatedAt(block.timestamp - 7 days);
-        
-        // Replace the pythTaoAggregator reference with our configured mock
-        // This is the oracle that wtaoPriceFeed actually uses (deployedTaoAggregator)
-        pythTaoAggregator = PythAggregatorV3(address(stalenessMock));
-        
-        // Also update wtaoOracle for consistency in tests that check it directly
-        wtaoOracle = PythAggregatorV3(address(stalenessMock));
+        // Configure the mock at the oracle address
+        PythOracleMock(address(wtaoOracle)).initializeStale();
     }
 
-    function etchMockToVtaoOracle() internal returns (PythAggregatorV3Mock) {
+    function etchMockToVtaoOracle() internal returns (PythOracleMock) {
         // Deploy a new mock and etch its code to the VTAO-USD oracle address
-        PythAggregatorV3Mock mockContract = new PythAggregatorV3Mock();
-        vm.etch(address(vtaoOracle), address(mockContract).code);
-        PythAggregatorV3Mock mock = PythAggregatorV3Mock(address(vtaoOracle));
-        // Note: Real Pyth oracles don't have setPrice/setUpdatedAt methods
-        // The oracle behavior is controlled by the etched mock code
+        vm.etch(address(vtaoOracle), address(pythOracleMock).code);
+        PythOracleMock mock = PythOracleMock(address(vtaoOracle));
+        mock.setDecimals(8);
+        mock.setPrice(0);
+        // Make it current
+        mock.setUpdatedAt(block.timestamp);
 
         return mock;
     }
 
-    function etchMockToWtaoOracle() internal returns (PythAggregatorV3Mock) {
+    function etchMockToWtaoOracle() internal returns (PythOracleMock) {
         // Deploy a new mock and etch its code to the WTAO-USD oracle address
-        PythAggregatorV3Mock mockContract = new PythAggregatorV3Mock();
-        vm.etch(address(wtaoOracle), address(mockContract).code);
-        PythAggregatorV3Mock mock = PythAggregatorV3Mock(address(wtaoOracle));
-        // Note: Real Pyth oracles don't have setPrice/setUpdatedAt methods
-        // The oracle behavior is controlled by the etched mock code
+        vm.etch(address(wtaoOracle), address(pythOracleMock).code);
+        PythOracleMock mock = PythOracleMock(address(wtaoOracle));
+        mock.setDecimals(8);
+        mock.setPrice(0);
+        // Make it current
+        mock.setUpdatedAt(block.timestamp);
 
         return mock;
     }
@@ -404,7 +387,7 @@ contract OraclePyth is TestAccounts {
         assertApproxEqRel(lastGoodPrice2, oraclePrice, 0.02e18);
 
         // Make the oracle stale
-        etchStaleMockToVtaoOracle(address(pythVTaoAggregator).code);
+        etchStaleMockToVtaoOracle();
         (,,, uint256 updatedAt,) = vtaoOracle.latestRoundData();
         assertApproxEqRel(updatedAt, block.timestamp - 7 days, 0.02e18);
 
@@ -420,7 +403,7 @@ contract OraclePyth is TestAccounts {
 
     function testOpenTroveVTAOWithStalePriceReverts() public {
         // Make the oracle stale
-        etchStaleMockToVtaoOracle(address(pythVTaoAggregator).code);
+        etchStaleMockToVtaoOracle();
         (,,, uint256 updatedAt,) = vtaoOracle.latestRoundData();
         assertApproxEqRel(updatedAt, block.timestamp - 7 days, 0.02e18);
 
@@ -437,7 +420,7 @@ contract OraclePyth is TestAccounts {
 
     function testOpenTroveWTAOWithStalePriceReverts() public {
         // Make the oracle stale
-        etchStaleMockToWtaoOracle("");
+        etchStaleMockToWtaoOracle();
         (,,, uint256 updatedAt,) = pythTaoAggregator.latestRoundData();
         assertApproxEqRel(updatedAt, block.timestamp - 7 days, 0.02e18);
 
