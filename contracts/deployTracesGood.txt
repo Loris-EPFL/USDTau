@@ -1,0 +1,73 @@
+No files changed, compilation skipped
+Traces:
+  [73213442] → new DeployLiquity2Script@0x5b73C5498c1E3b4dbA84de0F1833c4a029d90519
+    └─ ← [Return] 362922 bytes of code
+
+  [7823940] DeployLiquity2Script::run()
+    ├─ [0] VM::envOr("SALT", "1760901564") [staticcall]
+    │   └─ ← [Return] <env var value>
+    ├─ [0] VM::envBytes("DEPLOYER") [staticcall]
+    │   └─ ← [Return] <env var value>
+    ├─ [0] VM::envAddress("DEPLOYER") [staticcall]
+    │   └─ ← [Return] <env var value>
+    ├─ [0] VM::startBroadcast(0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266)
+    │   └─ ← [Return]
+    ├─ [0] VM::envOr("DEPLOYMENT_MODE", "complete") [staticcall]
+    │   └─ ← [Return] <env var value>
+    ├─ [0] VM::envOr("EPOCH_START", 1760296764 [1.76e9]) [staticcall]
+    │   └─ ← [Return] <env var value>
+    ├─ [0] VM::envOr("USE_TESTNET_PRICEFEEDS", false) [staticcall]
+    │   └─ ← [Return] <env var value>
+    ├─ [0] console::log("Deployer:               0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Deployer balance:       10_000 ether") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Deployment mode:        complete") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("CREATE2 salt:           keccak256(bytes(\"1760901564\")) = 0x6f31d58469b2b13086bf40e6bd31c7c912151a20db3808fc7cfe4979a070f8f1") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Governance epoch start: 1760296764") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Use testnet PriceFeeds: no") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::computeCreate2Address(0x6f31d58469b2b13086bf40e6bd31c7c912151a20db3808fc7cfe4979a070f8f1, 0xf2d6bd8280b2e68e520bdb5fa933ec68136b1823cb4819522f2adb5b62194548) [staticcall]
+    │   └─ ← [Return] BoldToken: [0x2163f76D90efC7aE0ac67dd2f29b28c169D2Ad9c]
+    ├─ [1444850] Create2Deployer::create2()
+    │   ├─ [1409660] → new BoldToken@0x2163f76D90efC7aE0ac67dd2f29b28c169D2Ad9c
+    │   │   ├─ emit OwnershipTransferred(previousOwner: 0x0000000000000000000000000000000000000000, newOwner: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266)
+    │   │   └─ ← [Return] 6690 bytes of code
+    │   └─ ← [Return] 0x2163f76d90efc7ae0ac67dd2f29b28c169d2ad9c
+    ├─ [1402508] → new WETHTester@0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512
+    │   ├─ emit OwnershipTransferred(previousOwner: 0x0000000000000000000000000000000000000000, newOwner: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266)
+    │   └─ ← [Return] 6654 bytes of code
+    ├─ [1210187] → new ERC20Faucet@0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0
+    │   ├─ emit OwnershipTransferred(previousOwner: 0x0000000000000000000000000000000000000000, newOwner: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266)
+    │   └─ ← [Return] 5689 bytes of code
+    ├─ [1210187] → new ERC20Faucet@0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9
+    │   ├─ emit OwnershipTransferred(previousOwner: 0x0000000000000000000000000000000000000000, newOwner: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266)
+    │   └─ ← [Return] 5689 bytes of code
+    ├─ [1210187] → new ERC20Faucet@0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9
+    │   ├─ emit OwnershipTransferred(previousOwner: 0x0000000000000000000000000000000000000000, newOwner: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266)
+    │   └─ ← [Return] 5689 bytes of code
+    ├─ [737323] → new MockStakingV1@0x5FC8d32690cc91D4c39d9d3abcBD16989F875707
+    │   ├─ emit OwnershipTransferred(previousOwner: 0x0000000000000000000000000000000000000000, newOwner: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266)
+    │   └─ ← [Return] 3562 bytes of code
+    ├─ [22869] ERC20Faucet::mock_setWildcardSpender(MockStakingV1: [0x5FC8d32690cc91D4c39d9d3abcBD16989F875707], true)
+    │   └─ ← [Stop]
+    ├─ [1262] ERC20Faucet::symbol() [staticcall]
+    │   └─ ← [Return] "USDC"
+    ├─ [1262] ERC20Faucet::symbol() [staticcall]
+    │   └─ ← [Return] "USDC"
+    ├─ [0] 0xfb37b8D939FFa77114005e61CFc2e543d6F49A81::deploy_plain_pool("BOLD/USDC Pool", "BOLDUSDC", [0x2163f76D90efC7aE0ac67dd2f29b28c169D2Ad9c, 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0], 100, 4000000 [4e6], 20000000000 [2e10], 866, 0, [0, 0], [0x00000000, 0x00000000], [0x0000000000000000000000000000000000000000, 0x0000000000000000000000000000000000000000])
+    │   └─ ← [Stop]
+    └─ ← [Revert] call to non-contract address 0xfb37b8D939FFa77114005e61CFc2e543d6F49A81
+
+
+
+== Logs ==
+  Deployer:               0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  Deployer balance:       10_000 ether
+  Deployment mode:        complete
+  CREATE2 salt:           keccak256(bytes("1760901564")) = 0x6f31d58469b2b13086bf40e6bd31c7c912151a20db3808fc7cfe4979a070f8f1
+  Governance epoch start: 1760296764
+  Use testnet PriceFeeds: no

@@ -53,7 +53,6 @@ uint256 constant _48_HOURS = 172800;
 
 // Pyth Test Deployer for vTAO and WTAO collaterals
 contract PythTestDeployer is MetadataDeployment, Test {
-    IERC20 constant USDC = IERC20(0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48);
     IWETH constant WETH_MAINNET = IWETH(0x9Dc08C6e2BF0F1eeD1E00670f80Df39145529F81);
 
     // UniV3
@@ -62,7 +61,6 @@ contract PythTestDeployer is MetadataDeployment, Test {
     INonfungiblePositionManager constant uniV3PositionManager =
         INonfungiblePositionManager(0xC36442b4a4522E871399CD717aBDD847Ab11FE88);
     uint24 constant UNIV3_FEE = 3000; // 0.3%
-    uint24 constant UNIV3_FEE_USDC_WETH = 500; // 0.05%
     uint24 constant UNIV3_FEE_WETH_COLL = 100; // 0.01%
 
     bytes32 constant SALT = keccak256("LiquityV2Pyth");

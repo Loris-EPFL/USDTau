@@ -41,7 +41,7 @@ contract DefaultPool is IDefaultPool {
         emit TroveManagerAddressChanged(troveManagerAddress);
         emit ActivePoolAddressChanged(activePoolAddress);
 
-        // Allow funds movements between Liquity contracts
+        // Approve ActivePool to spend collateral tokens
         collToken.approve(activePoolAddress, type(uint256).max);
     }
 

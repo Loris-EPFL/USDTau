@@ -1,0 +1,228 @@
+No files changed, compilation skipped
+Traces:
+  [32118279] → new DeployTaoLiquity@0x5b73C5498c1E3b4dbA84de0F1833c4a029d90519
+    └─ ← [Return] 160086 bytes of code
+
+  [12880540] DeployTaoLiquity::run()
+    ├─ [0] VM::startBroadcast()
+    │   └─ ← [Return]
+    ├─ [1409660] → new BoldToken@0x5FbDB2315678afecb367f032d93F642f64180aa3
+    │   ├─ emit OwnershipTransferred(previousOwner: 0x0000000000000000000000000000000000000000, newOwner: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266)
+    │   └─ ← [Return] 6690 bytes of code
+    ├─ [0] console::log("Deployed BoldToken:", BoldToken: [0x5FbDB2315678afecb367f032d93F642f64180aa3]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [562031] → new PythAggregatorV3@0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512
+    │   └─ ← [Return] 2585 bytes of code
+    ├─ [0] console::log("Deployed WTAO aggregator:", PythAggregatorV3: [0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Deploying contracts for collateral:", 0x31049849CCdD983D8F401077537438eaF12B12Af) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [12666] → new MockInterestRouter@0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0
+    │   └─ ← [Return] 63 bytes of code
+    ├─ [0] console::log("  InterestRouter:", MockInterestRouter: [0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [694216] → new AddressesRegistry@0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9
+    │   ├─ emit OwnershipTransferred(previousOwner: 0x0000000000000000000000000000000000000000, newOwner: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266)
+    │   └─ ← [Return] 3345 bytes of code
+    ├─ [0] console::log("  AddressesRegistry:", AddressesRegistry: [0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [143882] AddressesRegistry::setAddresses(AddressVars({ collToken: 0x31049849CCdD983D8F401077537438eaF12B12Af, borrowerOperations: 0x0000000000000000000000000000000000000000, troveManager: 0x0000000000000000000000000000000000000000, troveNFT: 0x0000000000000000000000000000000000000000, metadataNFT: 0x0000000000000000000000000000000000000000, stabilityPool: 0x0000000000000000000000000000000000000000, priceFeed: 0x0000000000000000000000000000000000000000, activePool: 0x0000000000000000000000000000000000000000, defaultPool: 0x0000000000000000000000000000000000000000, gasPoolAddress: 0x0000000000000000000000000000000000000000, collSurplusPool: 0x0000000000000000000000000000000000000000, sortedTroves: 0x0000000000000000000000000000000000000000, interestRouter: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, hintHelpers: 0x0000000000000000000000000000000000000000, multiTroveGetter: 0x0000000000000000000000000000000000000000, collateralRegistry: 0x0000000000000000000000000000000000000000, boldToken: 0x5FbDB2315678afecb367f032d93F642f64180aa3, WETH: 0x9Dc08C6e2BF0F1eeD1E00670f80Df39145529F81 }))
+    │   ├─ emit CollTokenAddressChanged(_newCollTokenAddress: 0x31049849CCdD983D8F401077537438eaF12B12Af)
+    │   ├─ emit BorrowerOperationsAddressChanged(_newBorrowerOperationsAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit TroveManagerAddressChanged(_newTroveManagerAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit TroveNFTAddressChanged(_newTroveNFTAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit MetadataNFTAddressChanged(_metadataNFTAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit StabilityPoolAddressChanged(_newStabilityPoolAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit PriceFeedAddressChanged(_priceFeedAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit ActivePoolAddressChanged(_activePoolAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit DefaultPoolAddressChanged(_newDefaultPoolAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit GasPoolAddressChanged(_gasPoolAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit CollSurplusPoolAddressChanged(_collSurplusPoolAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit SortedTrovesAddressChanged(_sortedTrovesAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit InterestRouterAddressChanged(_interestRouterAddress: MockInterestRouter: [0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0])
+    │   ├─ emit HintHelpersAddressChanged(_hintHelpersAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit MultiTroveGetterAddressChanged(_multiTroveGetterAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit CollateralRegistryAddressChanged(_collateralRegistryAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit BoldTokenAddressChanged(_boldTokenAddress: BoldToken: [0x5FbDB2315678afecb367f032d93F642f64180aa3])
+    │   ├─ emit WETHAddressChanged(_wethAddress: 0x9Dc08C6e2BF0F1eeD1E00670f80Df39145529F81)
+    │   ├─ emit OwnershipTransferred(previousOwner: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266, newOwner: 0x0000000000000000000000000000000000000000)
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  AddressesRegistry populated with initial contracts including collToken") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [1250179] → new SortedTroves@0x5FC8d32690cc91D4c39d9d3abcBD16989F875707
+    │   ├─ [416] AddressesRegistry::troveManager() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ [372] AddressesRegistry::borrowerOperations() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ emit TroveManagerAddressChanged(_newTroveManagerAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit BorrowerOperationsAddressChanged(_newBorrowerOperationsAddress: 0x0000000000000000000000000000000000000000)
+    │   └─ ← [Return] 6201 bytes of code
+    ├─ [1244820] → new TroveNFT@0x0165878A594ca255338adfa4d48449f69242Eb8F
+    │   ├─ [460] AddressesRegistry::collToken() [staticcall]
+    │   │   └─ ← [Return] 0x31049849CCdD983D8F401077537438eaF12B12Af
+    │   ├─ [8257] 0x31049849CCdD983D8F401077537438eaF12B12Af::name() [staticcall]
+    │   │   ├─ [3361] 0x58ea2Bb193B1429Cb90D24195E6ac4Ccb0B27a12::name() [delegatecall]
+    │   │   │   └─ ← [Return] "Virtual TAO"
+    │   │   └─ ← [Return] "Virtual TAO"
+    │   ├─ [460] AddressesRegistry::collToken() [staticcall]
+    │   │   └─ ← [Return] 0x31049849CCdD983D8F401077537438eaF12B12Af
+    │   ├─ [3812] 0x31049849CCdD983D8F401077537438eaF12B12Af::symbol() [staticcall]
+    │   │   ├─ [3416] 0x58ea2Bb193B1429Cb90D24195E6ac4Ccb0B27a12::symbol() [delegatecall]
+    │   │   │   └─ ← [Return] "vTAO"
+    │   │   └─ ← [Return] "vTAO"
+    │   ├─ [416] AddressesRegistry::troveManager() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ [460] AddressesRegistry::collToken() [staticcall]
+    │   │   └─ ← [Return] 0x31049849CCdD983D8F401077537438eaF12B12Af
+    │   ├─ [414] AddressesRegistry::metadataNFT() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ [415] AddressesRegistry::boldToken() [staticcall]
+    │   │   └─ ← [Return] BoldToken: [0x5FbDB2315678afecb367f032d93F642f64180aa3]
+    │   └─ ← [Return] 5881 bytes of code
+    ├─ [0] console::log("  SortedTroves:", SortedTroves: [0x5FC8d32690cc91D4c39d9d3abcBD16989F875707]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  TroveNFT:", TroveNFT: [0x0165878A594ca255338adfa4d48449f69242Eb8F]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [468786] → new CollSurplusPool@0xa513E6E4b8f2a923D98304ec87F64353C4D5C853
+    │   ├─ [460] AddressesRegistry::collToken() [staticcall]
+    │   │   └─ ← [Return] 0x31049849CCdD983D8F401077537438eaF12B12Af
+    │   ├─ [372] AddressesRegistry::borrowerOperations() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ [416] AddressesRegistry::troveManager() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ emit BorrowerOperationsAddressChanged(_newBorrowerOperationsAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit TroveManagerAddressChanged(_newTroveManagerAddress: 0x0000000000000000000000000000000000000000)
+    │   └─ ← [Return] 2316 bytes of code
+    ├─ [1718834] → new StabilityPool@0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6
+    │   ├─ [371] AddressesRegistry::activePool() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ [394] AddressesRegistry::defaultPool() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ [437] AddressesRegistry::priceFeed() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ emit ActivePoolAddressChanged(_activePoolAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit DefaultPoolAddressChanged(_newDefaultPoolAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit PriceFeedAddressChanged(_priceFeedAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ [460] AddressesRegistry::collToken() [staticcall]
+    │   │   └─ ← [Return] 0x31049849CCdD983D8F401077537438eaF12B12Af
+    │   ├─ [416] AddressesRegistry::troveManager() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ [415] AddressesRegistry::boldToken() [staticcall]
+    │   │   └─ ← [Return] BoldToken: [0x5FbDB2315678afecb367f032d93F642f64180aa3]
+    │   ├─ emit TroveManagerAddressChanged(_newTroveManagerAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit BoldTokenAddressChanged(_boldTokenAddress: BoldToken: [0x5FbDB2315678afecb367f032d93F642f64180aa3])
+    │   └─ ← [Return] 8385 bytes of code
+    ├─ [0] console::log("  CollSurplusPool:", CollSurplusPool: [0xa513E6E4b8f2a923D98304ec87F64353C4D5C853]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  StabilityPool:", StabilityPool: [0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [4954692] → new TroveManager@0x8A791620dd6260079BF849Dc5567aDC3F2FdC318
+    │   ├─ [371] AddressesRegistry::activePool() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ [394] AddressesRegistry::defaultPool() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ [437] AddressesRegistry::priceFeed() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ emit ActivePoolAddressChanged(_activePoolAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit DefaultPoolAddressChanged(_newDefaultPoolAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit PriceFeedAddressChanged(_priceFeedAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ [240] AddressesRegistry::CCR()
+    │   │   └─ ← [Return] 1500000000000000000 [1.5e18]
+    │   ├─ [285] AddressesRegistry::MCR()
+    │   │   └─ ← [Return] 1100000000000000000 [1.1e18]
+    │   ├─ [262] AddressesRegistry::SCR()
+    │   │   └─ ← [Return] 1300000000000000000 [1.3e18]
+    │   ├─ [241] AddressesRegistry::LIQUIDATION_PENALTY_SP()
+    │   │   └─ ← [Return] 50000000000000000 [5e16]
+    │   ├─ [285] AddressesRegistry::LIQUIDATION_PENALTY_REDISTRIBUTION()
+    │   │   └─ ← [Return] 50000000000000000 [5e16]
+    │   ├─ [372] AddressesRegistry::troveNFT() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ [372] AddressesRegistry::borrowerOperations() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ [350] AddressesRegistry::stabilityPool() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ [436] AddressesRegistry::gasPoolAddress() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ [415] AddressesRegistry::collSurplusPool() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ [415] AddressesRegistry::boldToken() [staticcall]
+    │   │   └─ ← [Return] BoldToken: [0x5FbDB2315678afecb367f032d93F642f64180aa3]
+    │   ├─ [393] AddressesRegistry::sortedTroves() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ [371] AddressesRegistry::WETH()
+    │   │   └─ ← [Return] 0x9Dc08C6e2BF0F1eeD1E00670f80Df39145529F81
+    │   ├─ [392] AddressesRegistry::collateralRegistry() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ emit TroveNFTAddressChanged(_newTroveNFTAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit BorrowerOperationsAddressChanged(_newBorrowerOperationsAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit StabilityPoolAddressChanged(_newStabilityPoolAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit GasPoolAddressChanged(_gasPoolAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit CollSurplusPoolAddressChanged(_collSurplusPoolAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit BoldTokenAddressChanged(_boldTokenAddress: BoldToken: [0x5FbDB2315678afecb367f032d93F642f64180aa3])
+    │   ├─ emit SortedTrovesAddressChanged(_sortedTrovesAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit CollateralRegistryAddressChanged(_collateralRegistryAddress: 0x0000000000000000000000000000000000000000)
+    │   └─ ← [Return] 24389 bytes of code
+    ├─ [0] console::log("  TroveManager:", TroveManager: [0x8A791620dd6260079BF849Dc5567aDC3F2FdC318]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [62040] → new <unknown>@0x610178dA211FEF7D417bC0e6FeD39F05609AD788
+    │   ├─ [371] AddressesRegistry::activePool() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ [394] AddressesRegistry::defaultPool() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ [437] AddressesRegistry::priceFeed() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ emit ActivePoolAddressChanged(_activePoolAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit DefaultPoolAddressChanged(_newDefaultPoolAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit PriceFeedAddressChanged(_priceFeedAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ [372] AddressesRegistry::troveNFT() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ emit TroveNFTAddressChanged(_newTroveNFTAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ [460] AddressesRegistry::collToken() [staticcall]
+    │   │   └─ ← [Return] 0x31049849CCdD983D8F401077537438eaF12B12Af
+    │   ├─ [371] AddressesRegistry::WETH()
+    │   │   └─ ← [Return] 0x9Dc08C6e2BF0F1eeD1E00670f80Df39145529F81
+    │   ├─ [240] AddressesRegistry::CCR()
+    │   │   └─ ← [Return] 1500000000000000000 [1.5e18]
+    │   ├─ [262] AddressesRegistry::SCR()
+    │   │   └─ ← [Return] 1300000000000000000 [1.3e18]
+    │   ├─ [285] AddressesRegistry::MCR()
+    │   │   └─ ← [Return] 1100000000000000000 [1.1e18]
+    │   ├─ [262] AddressesRegistry::BCR()
+    │   │   └─ ← [Return] 100000000000000000 [1e17]
+    │   ├─ [416] AddressesRegistry::troveManager() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ [436] AddressesRegistry::gasPoolAddress() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ [415] AddressesRegistry::collSurplusPool() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ [393] AddressesRegistry::sortedTroves() [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000
+    │   ├─ [415] AddressesRegistry::boldToken() [staticcall]
+    │   │   └─ ← [Return] BoldToken: [0x5FbDB2315678afecb367f032d93F642f64180aa3]
+    │   ├─ emit TroveManagerAddressChanged(_newTroveManagerAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit GasPoolAddressChanged(_gasPoolAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit CollSurplusPoolAddressChanged(_collSurplusPoolAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit SortedTrovesAddressChanged(_sortedTrovesAddress: 0x0000000000000000000000000000000000000000)
+    │   ├─ emit BoldTokenAddressChanged(_boldTokenAddress: BoldToken: [0x5FbDB2315678afecb367f032d93F642f64180aa3])
+    │   ├─ [1047] 0x31049849CCdD983D8F401077537438eaF12B12Af::approve(0x0000000000000000000000000000000000000000, 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    │   │   ├─ [647] 0x58ea2Bb193B1429Cb90D24195E6ac4Ccb0B27a12::approve(0x0000000000000000000000000000000000000000, 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77]) [delegatecall]
+    │   │   │   └─ ← [Revert] ERC20InvalidSpender(0x0000000000000000000000000000000000000000)
+    │   │   └─ ← [Revert] ERC20InvalidSpender(0x0000000000000000000000000000000000000000)
+    │   └─ ← [Revert] 0x94280d620000000000000000000000000000000000000000000000000000000000000000
+    └─ ← [Revert] ERC20InvalidSpender(0x0000000000000000000000000000000000000000)
+
+
+
+== Logs ==
+  Deployed BoldToken: 0x5FbDB2315678afecb367f032d93F642f64180aa3
+  Deployed WTAO aggregator: 0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512
+  Deploying contracts for collateral: 0x31049849CCdD983D8F401077537438eaF12B12Af
+    InterestRouter: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0
+    AddressesRegistry: 0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9
+    AddressesRegistry populated with initial contracts including collToken
+    SortedTroves: 0x5FC8d32690cc91D4c39d9d3abcBD16989F875707
+    TroveNFT: 0x0165878A594ca255338adfa4d48449f69242Eb8F
+    CollSurplusPool: 0xa513E6E4b8f2a923D98304ec87F64353C4D5C853
+    StabilityPool: 0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6
+    TroveManager: 0x8A791620dd6260079BF849Dc5567aDC3F2FdC318
