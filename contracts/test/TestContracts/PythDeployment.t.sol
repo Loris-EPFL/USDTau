@@ -325,7 +325,8 @@ contract PythTestDeployer is MetadataDeployment, Test {
             );
         }
 
-
+        // Authorize CollateralRegistry to burn BoldToken
+        result.boldToken.setCollateralRegistry(address(result.collateralRegistry));
 
         return result;
     }
@@ -454,7 +455,7 @@ contract PythTestDeployer is MetadataDeployment, Test {
     function _deployContracts(DeploymentParamsMainnet memory params, LiquityContracts memory contracts, MockInterestRouter mockInterestRouter) internal {
         // Now deploy the actual contracts
         contracts.borrowerOperations = new BorrowerOperations{salt: SALT}(params.addressesRegistry);
-        contracts.troveManager = ITroveManager(params.troveManagerAddress); // Use existing TM
+        contracts.troveManager = new TroveManager{salt: SALT}(params.addressesRegistry); // Actually deploy TM
         contracts.sortedTroves = new SortedTroves{salt: SALT}(params.addressesRegistry);
         contracts.activePool = new ActivePool{salt: SALT}(params.addressesRegistry);
         contracts.stabilityPool = new StabilityPool{salt: SALT}(params.addressesRegistry);
