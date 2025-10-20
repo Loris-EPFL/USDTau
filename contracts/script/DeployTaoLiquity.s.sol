@@ -263,6 +263,21 @@ contract DeployTaoLiquity is Script {
         // Deploy WETHZapper (using WTAO instead of WETH)
         contracts.wethZapper = _deployWETHZapper(contracts.addressesRegistry);
         
+        // CRITICAL: Set up BoldToken authorization for core contracts
+        // This is required for BorrowerOperations to mint/burn BOLD tokens
+        contracts.boldToken.setBranchAddresses(
+            address(contracts.troveManager),     // troveManager - needs to burn tokens during liquidations
+            address(contracts.stabilityPool),   // stabilityPool - needs to burn tokens during stability pool operations
+            address(contracts.borrowerOperations), // borrowerOperations - needs to mint tokens when opening troves
+            address(contracts.activePool)       // activePool - needs to handle token transfers
+        );
+        
+        console2.log("BoldToken authorization set up for core contracts:");
+        console2.log("  - TroveManager:", address(contracts.troveManager));
+        console2.log("  - StabilityPool:", address(contracts.stabilityPool));
+        console2.log("  - BorrowerOperations:", address(contracts.borrowerOperations));
+        console2.log("  - ActivePool:", address(contracts.activePool));
+        
         console2.log("All contracts deployed successfully with CREATE2 addresses");
         
         return contracts;
@@ -423,6 +438,18 @@ contract DeployTaoLiquity is Script {
         WETHZapper wethZapper = new WETHZapper(_addressesRegistry, flashLoanProvider, exchange);
         
         console2.log("WETHZapper deployed for WTAO at:", address(wethZapper));
+        
+        // Register WETHZapper as an authorized caller in BoldToken
+        // WETHZapper needs to be able to transfer BOLD tokens after minting
+        IBoldToken boldToken = _addressesRegistry.boldToken();
+        boldToken.setBranchAddresses(
+            address(0), // troveManager - not needed for WETHZapper
+            address(0), // stabilityPool - not needed for WETHZapper  
+            address(0), // borrowerOperations - WETHZapper is NOT a borrower operations contract
+            address(0) // activePool - not needed for WETHZapper
+        );
+        
+        console2.log("WETHZapper deployed but NOT registered as BorrowerOperations (this is correct)");
         
         return wethZapper;
     }
