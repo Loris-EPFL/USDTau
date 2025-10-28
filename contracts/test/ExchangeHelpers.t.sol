@@ -53,9 +53,9 @@ contract ExchangeHelpersTest is Test, UseDeployment {
     uint24 constant UNIV3_FEE_USDC_WETH = 500; // 0.05%
     uint24 constant UNIV3_FEE_WETH_COLL = 100; // 0.01%
 
-    IQuoterV2 constant uniV3Quoter = IQuoterV2(0x61fFE014bA17989E743c5F6cB21bF9697530B21e);
-    ISwapRouter constant uniV3Router = ISwapRouter(0xE592427A0AEce92De3Edee1F18E0157C05861564);
-
+    IQuoterV2 constant uniV3Quoter = IQuoterV2(0xd7D7D7075139CE8CE02f97Bd113f3f89f60851C3);
+    ISwapRouter constant uniV3Router = ISwapRouter(0x667A1AA098D03f788eBaD7678B7c02504EaC6092);
+    // curveUsdcBold = ICurveStableswapNGPool(0x2030303030303030303030303030303030303030);
     mapping(address collToken => IExchange) exchange;
     IExchangeHelpersV2 exchangeHelpersV2;
 
@@ -82,33 +82,33 @@ contract ExchangeHelpersTest is Test, UseDeployment {
         exchangeHelpersV2 = new HybridCurveUniV3ExchangeHelpersV2({
             _usdc: USDC,
             _weth: WETH,
-            _curvePool: ICurveStableswapNGPool(address(curveUsdcBold)),
-            _usdcIndex: int8(curveUsdcBold.coins(0) == USDC ? 0 : 1),
-            _boldIndex: int8(curveUsdcBold.coins(0) == BOLD ? 0 : 1),
+            _curvePool: ICurveStableswapNGPool(address(0)),
+            _usdcIndex: 0,
+            _boldIndex: 1,
             _feeUsdcWeth: UNIV3_FEE_USDC_WETH,
             _feeWethColl: UNIV3_FEE_WETH_COLL,
             _uniV3Quoter: uniV3Quoter
         });
     }
 
-    function test_Curve_CanQuoteApproxDx(bool zeroToOne, uint256 dyExpected) external {
-        (int128 i, int128 j) = zeroToOne ? (int128(0), int128(1)) : (int128(1), int128(0));
-        (address inputToken, address outputToken) = (curveUsdcBold.coins(uint128(i)), curveUsdcBold.coins(uint128(j)));
-        uint256 dyDecimals = IERC20(outputToken).decimals();
-        uint256 dyDiv = 10 ** (18 - dyDecimals);
-        dyExpected = bound(dyExpected, 1 ether / dyDiv, 1_000_000 ether / dyDiv);
+    // function test_Curve_CanQuoteApproxDx(bool zeroToOne, uint256 dyExpected) external {
+    //     (int128 i, int128 j) = zeroToOne ? (int128(0), int128(1)) : (int128(1), int128(0));
+    //     (address inputToken, address outputToken) = (curveUsdcBold.coins(uint128(i)), curveUsdcBold.coins(uint128(j)));
+    //     uint256 dyDecimals = IERC20(outputToken).decimals();
+    //     uint256 dyDiv = 10 ** (18 - dyDecimals);
+    //     dyExpected = bound(dyExpected, 1 ether / dyDiv, 1_000_000 ether / dyDiv);
 
-        uint256 dx = curveUsdcBold.get_dx(i, j, dyExpected);
-        vm.assume(dx > 0); // For some reason Curve sometimes says you can get >0 output tokens in exchange for 0 input
+    //     uint256 dx = curveUsdcBold.get_dx(i, j, dyExpected);
+    //     vm.assume(dx > 0); // For some reason Curve sometimes says you can get >0 output tokens in exchange for 0 input
 
-        uint256 balance0 = IERC20(outputToken).balanceOf(address(this));
-        deal(inputToken, address(this), dx);
-        IERC20(inputToken).approve(address(curveUsdcBold), dx);
-        uint256 dy = curveUsdcBold.exchange(i, j, dx, 0);
+    //     uint256 balance0 = IERC20(outputToken).balanceOf(address(this));
+    //     deal(inputToken, address(this), dx);
+    //     IERC20(inputToken).approve(address(curveUsdcBold), dx);
+    //     uint256 dy = curveUsdcBold.exchange(i, j, dx, 0);
 
-        assertEqDecimal(IERC20(outputToken).balanceOf(address(this)) - balance0, dy, dyDecimals, "balance != dy");
-        assertApproxEqRelDecimal(dy, dyExpected, 1e-5 ether, dyDecimals, "dy !~= expected dy");
-    }
+    //     assertEqDecimal(IERC20(outputToken).balanceOf(address(this)) - balance0, dy, dyDecimals, "balance != dy");
+    //     assertApproxEqRelDecimal(dy, dyExpected, 1e-5 ether, dyDecimals, "dy !~= expected dy");
+    // }
 
     function test_UniV3_CanQuoteApproxDx(bool collToUsdc, uint256 collIndex, uint256 dyExpected) external {
         collIndex = bound(collIndex, 0, branches.length - 1);

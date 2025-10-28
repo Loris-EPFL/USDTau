@@ -489,10 +489,8 @@ contract PythTestDeployer is MetadataDeployment, Test {
             
             return new PythVTAOPriceFeed(
                 address(deployedTaoAggregator), // TAO-USD aggregator
-                address(deployedVTaoAggregator), // vTAO-USD aggregator
                 _externalAddresses.VTAOToken,
                 3600, // 1 hour staleness threshold for TAO-USD
-                3600, // 1 hour staleness threshold for vTAO-USD
                 _borrowerOperationsAddress
             );
         }

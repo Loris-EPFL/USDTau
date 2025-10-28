@@ -54,6 +54,9 @@
     "zx": "^8.1.9"
   },
   "dependencies": {
+    "@layerzerolabs/lz-evm-protocol-v2": "^3.0.142",
+    "@layerzerolabs/oapp-evm": "^0.3.2",
+    "@layerzerolabs/oft-evm": "^3.2.1",
     "@pythnetwork/pyth-sdk-solidity": "^4.2.0"
   }
 }

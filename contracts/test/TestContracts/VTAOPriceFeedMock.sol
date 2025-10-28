@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.24;
 
-import "src/Interfaces/IVTAOPriceFeed.sol";
+import "src/PriceFeeds/PythVTAOPriceFeed.sol";
+import "src/PriceFeeds/PythWTAOPriceFeed.sol";
 import "src/Interfaces/IMainnetPriceFeed.sol";
 import "src/Dependencies/AggregatorV3Interface.sol";
 
@@ -87,7 +88,7 @@ contract VTAOPriceFeedMock is IVTAOPriceFeed {
         _shouldOracleFail = shouldFail;
     }
 
-    function initializeFromRealPriceFeed(IVTAOPriceFeed realPriceFeed) external {
+    function initializeFromRealPriceFeed(PythVTAOPriceFeed realPriceFeed) external {
         _lastGoodPrice = realPriceFeed.lastGoodPrice();
         _priceSource = IMainnetPriceFeed.PriceSource.primary;
         _shouldOracleFail = false;

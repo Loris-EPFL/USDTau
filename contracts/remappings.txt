@@ -1,2 +1,6 @@
+@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/
 openzeppelin/=lib/V2-gov/lib/openzeppelin-contracts/
 @pythnetwork/pyth-sdk-solidity/=node_modules/@pythnetwork/pyth-sdk-solidity/
+@layerzerolabs/oft-evm/contracts/=node_modules/@layerzerolabs/oft-evm/contracts/
+@layerzerolabs/oapp-evm/contracts/=node_modules/@layerzerolabs/oapp-evm/contracts/
+@layerzerolabs/lz-evm-protocol-v2/contracts/=node_modules/@layerzerolabs/lz-evm-protocol-v2/contracts/

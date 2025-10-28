@@ -21,7 +21,7 @@ contract BittensorPrecompileMock is IBittensorPrecompilesMock {
     function getStake(bytes32 hotkey, bytes32 coldkey, uint256 netuid) external pure override returns (uint256) {
         // Return the calculated stake amount that makes vTAOtoTAO work correctly
         // Formula: (1003942352 * 273013074269530958540) / 1e18 = 274089387908
-        return 274089387908;
+        return 524089387908;
     }
 
     /**

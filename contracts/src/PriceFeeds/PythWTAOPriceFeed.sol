@@ -2,34 +2,23 @@
 
 pragma solidity ^0.8.0;
 
-import "./PythPriceFeedBase.sol";
 import "../Interfaces/ITAOPriceFeed.sol";
+import "./MainnetPriceFeedBase.sol";
+
 
 /*
  * PriceFeed for WTAO token.
  * Fetches the price of TAO in USD.
  */
-contract PythWTAOPriceFeed is PythPriceFeedBase, ITAOPriceFeed {
+contract PythWTAOPriceFeed is MainnetPriceFeedBase {
     constructor(
         address _taoUsdAggregator,
         uint256 _taoUsdStalenessThreshold,
         address _borrowOperationsAddress
-    ) PythPriceFeedBase(_taoUsdAggregator, _taoUsdStalenessThreshold, _borrowOperationsAddress) {
+    ) MainnetPriceFeedBase(_taoUsdAggregator, _taoUsdStalenessThreshold, _borrowOperationsAddress) {
         // Fetch the price to ensure the oracle is working
         _fetchPricePrimary();
         assert(priceSource == PriceSource.primary);
-    }
-
-    // Compatibility function for the interface
-    function ethUsdOracle() external view override returns (AggregatorV3Interface, uint256, uint8) {
-        // Return the TAO/USD oracle (since we're using TAO as the base), staleness threshold, and decimals
-        return (taoUsdOracleData.aggregator, taoUsdOracleData.stalenessThreshold, taoUsdOracleData.decimals);
-    }
-
-    // Compatibility function for the interface
-    function taoUsdOracle() external view override(ITAOPriceFeed) returns (AggregatorV3Interface, uint256, uint8) {
-        // Return the TAO/USD oracle, staleness threshold, and decimals
-        return (taoUsdOracleData.aggregator, taoUsdOracleData.stalenessThreshold, taoUsdOracleData.decimals);
     }
 
     function fetchPrice() public returns (uint256, bool) {
@@ -42,7 +31,7 @@ contract PythWTAOPriceFeed is PythPriceFeedBase, ITAOPriceFeed {
     }
 
     function fetchRedemptionPrice() external returns (uint256, bool) {
-        // Use same price for redemption as all other ops in WTAO branch
+        // Use same price for redemption as all other ops in WETH branch
         return fetchPrice();
     }
 
@@ -51,12 +40,12 @@ contract PythWTAOPriceFeed is PythPriceFeedBase, ITAOPriceFeed {
     // - A bool indicating whether a new oracle failure was detected in the call
     function _fetchPricePrimary() internal returns (uint256, bool) {
         assert(priceSource == PriceSource.primary);
-        (uint256 taoUsdPrice, bool taoUsdOracleDown) = _getOracleAnswer(taoUsdOracleData);
+        (uint256 ethUsdPrice, bool ethUsdOracleDown) = _getOracleAnswer(ethUsdOracle);
 
-        // If the TAO-USD oracle response was invalid in this transaction, return the last good TAO-USD price calculated
-        if (taoUsdOracleDown) return (_shutDownAndSwitchToLastGoodPrice(address(taoUsdOracleData.aggregator)), true);
+        // If the ETH-USD Chainlink response was invalid in this transaction, return the last good ETH-USD price calculated
+        if (ethUsdOracleDown) return (_shutDownAndSwitchToLastGoodPrice(address(ethUsdOracle.aggregator)), true);
 
-        lastGoodPrice = taoUsdPrice;
-        return (taoUsdPrice, false);
+        lastGoodPrice = ethUsdPrice;
+        return (ethUsdPrice, false);
     }
 }

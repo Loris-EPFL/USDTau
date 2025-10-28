@@ -27,6 +27,7 @@ import {IWETH} from "src/Interfaces/IWETH.sol";
 import {ICurveStableSwapNG} from "../Interfaces/Curve/ICurveStableSwapNG.sol";
 import {ILiquidityGaugeV6} from "../Interfaces/Curve/ILiquidityGaugeV6.sol";
 import {StringEquality} from "./StringEquality.sol";
+import {console} from "forge-std/console.sol";
 
 function coalesce(address a, address b) pure returns (address) {
     return a != address(0) ? a : b;
@@ -93,6 +94,7 @@ contract UseDeployment is CommonBase {
         hintHelpers = IHintHelpers(json.readAddress(".hintHelpers"));
         exchangeHelpers = IExchangeHelpers(json.readAddress(".exchangeHelpers"));
         governance = Governance(json.readAddress(".governance.governance"));
+        console.log("prout");
         curveUsdcBold = ICurveStableSwapNG(json.readAddress(".governance.curveUsdcBoldPool"));
         curveUsdcBoldGauge = ILiquidityGaugeV6(json.readAddress(".governance.curveUsdcBoldGauge"));
         curveUsdcBoldInitiative = CurveV2GaugeRewards(json.readAddress(".governance.curveUsdcBoldInitiative"));
@@ -118,9 +120,9 @@ contract UseDeployment is CommonBase {
         EPOCH_START = json.readUint(".governance.constants.EPOCH_START");
         EPOCH_DURATION = json.readUint(".governance.constants.EPOCH_DURATION");
         REGISTRATION_FEE = json.readUint(".governance.constants.REGISTRATION_FEE");
-        LQTY = json.readAddress(".governance.LQTYToken");
-        USDC = curveUsdcBold.coins(0) != BOLD ? curveUsdcBold.coins(0) : curveUsdcBold.coins(1);
-        LUSD = address(IUserProxy(governance.userProxyImplementation()).lusd());
+        LQTY = 0xB833E8137FEDf80de7E908dc6fea43a029142F20;//json.readAddress(".governance.LQTYToken");
+        USDC = 0xB833E8137FEDf80de7E908dc6fea43a029142F20;//curveUsdcBold.coins(0) != BOLD ? curveUsdcBold.coins(0) : curveUsdcBold.coins(1);
+        LUSD = 0xB833E8137FEDf80de7E908dc6fea43a029142F20;//address(IUserProxy(governance.userProxyImplementation()).lusd());
 
         for (uint256 i = 0; i < collateralRegistry.totalCollaterals(); ++i) {
             string memory branch = string.concat(".branches[", i.toString(), "]");
@@ -157,11 +159,11 @@ contract UseDeployment is CommonBase {
             vm.label(address(branches[i].zapper), "Zapper");
 
             string memory collSymbol = branches[i].collToken.symbol();
-            if (collSymbol.eq("WETH")) {
+            if (collSymbol.eq("WTAO")) {
                 WETH = address(branches[i].collToken);
-            } else if (collSymbol.eq("wstETH")) {
+            } else if (collSymbol.eq("vTAO")) {
                 WSTETH = address(branches[i].collToken);
-            } else if (collSymbol.eq("rETH")) {
+            } else if (collSymbol.eq("vTAO")) {
                 RETH = address(branches[i].collToken);
             } else {
                 revert(string.concat("Unexpected collateral ", collSymbol));

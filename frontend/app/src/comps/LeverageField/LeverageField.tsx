@@ -270,8 +270,8 @@ export function useLeverageField({
 
   const drawer: Drawer | null = deposit && dn.gt(deposit, DNUM_0) && debt && dn.lt(debt, MIN_DEBT)
     ? { mode: "error", message: `Debt must be at least ${fmtnum(MIN_DEBT, 2)} BOLD.` }
-    : quoteAmount === null
-    ? { mode: "error", message: `Not enough ${collToken.name} liquidity to reach your chosen exposure.` }
+    // : quoteAmount === null
+    // ? { mode: "error", message: `Not enough ${collToken.name} liquidity to reach your chosen exposure.` }
     : null;
 
   const isValid = !drawer

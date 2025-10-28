@@ -4,7 +4,6 @@ pragma solidity 0.8.24;
 
 import "src/PriceFeeds/PythVTAOPriceFeed.sol";
 import "src/PriceFeeds/PythWTAOPriceFeed.sol";
-import "src/PriceFeeds/PythPriceFeedBase.sol";
 
 import "./TestContracts/Accounts.sol";
 import "./TestContracts/GasGuzzlerOracle.sol";
@@ -17,8 +16,7 @@ import "./TestContracts/WTAOPriceFeedMock.sol";
 import {PythAggregatorV3} from "@pythnetwork/pyth-sdk-solidity/PythAggregatorV3.sol";
 
 import "src/Dependencies/AggregatorV3Interface.sol";
-import "src/Interfaces/IVTAOPriceFeed.sol";
-import "src/Interfaces/ITAOPriceFeed.sol";
+
 
 import "forge-std/Test.sol";
 import "lib/forge-std/src/console2.sol";
@@ -38,8 +36,8 @@ contract OraclePyth is TestAccounts {
     VTAOPriceFeedMock vtaoPriceFeedMock;
     WTAOPriceFeedMock wtaoPriceFeedMock;
 
-    IVTAOPriceFeed vtaoPriceFeed;
-    ITAOPriceFeed wtaoPriceFeed;
+    PythVTAOPriceFeed vtaoPriceFeed;
+    PythWTAOPriceFeed wtaoPriceFeed;
 
     IERC20Metadata vtaoToken;
     IERC20Metadata wtaoToken;
@@ -131,8 +129,8 @@ contract OraclePyth is TestAccounts {
         pythWTaoAggregator = deployer.deployedWTaoAggregator();
 
         // Get the price feeds from the deployed contracts
-        vtaoPriceFeed = IVTAOPriceFeed(address(result.contractsArray[0].priceFeed));
-        wtaoPriceFeed = ITAOPriceFeed(address(result.contractsArray[1].priceFeed));
+        vtaoPriceFeed = PythVTAOPriceFeed(address(result.contractsArray[0].priceFeed));
+        wtaoPriceFeed = PythWTAOPriceFeed(address(result.contractsArray[1].priceFeed));
 
         gasGuzzlerToken = new GasGuzzlerToken();
         gasGuzzlerOracle = new GasGuzzlerOracle();
@@ -304,12 +302,12 @@ contract OraclePyth is TestAccounts {
     // --- Thresholds set at deployment ---
 
     function testVtaoUsdStalenessThresholdSetVTAO() public view {
-        (, uint256 storedVtaoUsdStaleness,) = IVTAOPriceFeed(address(vtaoPriceFeed)).vTaoUsdOracle();
+        (, uint256 storedVtaoUsdStaleness,) = vtaoPriceFeed.stEthUsdOracle();
         assertEq(storedVtaoUsdStaleness, 3600); // _24_HOURS
     }
 
     function testWtaoUsdStalenessThresholdSetWTAO() public view {
-        (, uint256 storedWtaoUsdStaleness,) = wtaoPriceFeed.taoUsdOracle();
+        (, uint256 storedWtaoUsdStaleness,) = wtaoPriceFeed.ethUsdOracle();
         assertEq(storedWtaoUsdStaleness, 3600); // _24_HOURS
     }
 
