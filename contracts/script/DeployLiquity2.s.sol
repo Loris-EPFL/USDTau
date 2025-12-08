@@ -56,6 +56,9 @@ import {MockStakingV1} from "V2-gov/test/mocks/MockStakingV1.sol";
 
 import {DeployGovernance} from "./DeployGovernance.s.sol";
 
+import {TransparentUpgradeableProxy} from "@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol";
+
+
 function _latestUTCMidnightBetweenWednesdayAndThursday() view returns (uint256) {
     return block.timestamp / 1 weeks * 1 weeks;
 }
@@ -610,7 +613,12 @@ contract DeployLiquity2Script is DeployGovernance, UniPriceConverter, StdCheats,
             vars.troveManagers[vars.i] = ITroveManager(troveManagerAddress);
         }
 
-        r.collateralRegistry = new CollateralRegistry(r.boldToken, vars.collaterals, vars.troveManagers);
+        r.collateralRegistry = ICollateralRegistry(_deployCollateralRegistryWithProxy(
+            r.boldToken, 
+            vars.collaterals, 
+            vars.troveManagers, 
+            deployer
+        ));
         r.hintHelpers = new HintHelpers(r.collateralRegistry);
         r.multiTroveGetter = new MultiTroveGetter(r.collateralRegistry);
         r.debtInFrontHelper = new DebtInFrontHelper(r.collateralRegistry, r.hintHelpers);
@@ -656,6 +664,40 @@ contract DeployLiquity2Script is DeployGovernance, UniPriceConverter, StdCheats,
             _uniV3Quoter: uniV3Quoter
         });
     }
+
+    
+    // Helper function to deploy CollateralRegistry with proxy (if needed in future)
+    function _deployCollateralRegistryWithProxy(
+        IBoldToken _boldToken,
+        IERC20Metadata[] memory _tokens,
+        ITroveManager[] memory _troveManagers,
+        address _owner
+    ) internal returns (CollateralRegistry) {
+        // Deploy implementation
+        CollateralRegistry implementation = new CollateralRegistry();
+        
+        // Encode initialization data
+        bytes memory initData = abi.encodeWithSelector(
+            CollateralRegistry.initialize.selector,
+            _boldToken,
+            _tokens,
+            _troveManagers,
+            _owner
+        );
+
+        //TODO test only
+        address proxyAdmin = 0x70997970C51812dc3A010C7d01b50e0d17dc79C8; //Anvil 2nd account
+        
+        // Deploy proxy
+        TransparentUpgradeableProxy proxy = new TransparentUpgradeableProxy(
+            address(implementation),
+            proxyAdmin, // Never Use admin as owner
+            initData
+        );
+        
+        return CollateralRegistry(address(proxy));
+    }
+
 
     function _deployAddressesRegistry(TroveManagerParams memory _troveManagerParams)
         internal

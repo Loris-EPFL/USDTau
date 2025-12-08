@@ -4,7 +4,9 @@ pragma solidity 0.8.24;
 
 import "openzeppelin-contracts/contracts/token/ERC20/extensions/ERC20Permit.sol";
 import "./Dependencies/Ownable.sol";
+import {EIP3009} from "./Dependencies/EIP3009.sol";
 import "./Interfaces/IBoldToken.sol";
+
 
 /*
  * --- Functionality added specific to the BoldToken ---
@@ -16,7 +18,7 @@ import "./Interfaces/IBoldToken.sol";
  * 2) sendToPool() and returnFromPool(): functions callable only Liquity core contracts, which move BOLD tokens between Liquity <-> user.
  */
 
-contract BoldToken is Ownable, IBoldToken, ERC20Permit {
+contract BoldToken is Ownable, IBoldToken, EIP3009 {
     string internal constant _NAME = "BOLD Stablecoin";
     string internal constant _SYMBOL = "BOLD";
 

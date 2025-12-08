@@ -45,6 +45,9 @@ import "src/PriceFeeds/WETHPriceFeed.sol";
 import "src/PriceFeeds/WSTETHPriceFeed.sol";
 import "src/PriceFeeds/RETHPriceFeed.sol";
 
+import {TransparentUpgradeableProxy} from "@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol";
+
+
 import "forge-std/console2.sol";
 
 uint256 constant _24_HOURS = 86400;
@@ -330,7 +333,12 @@ contract TestDeployer is MetadataDeployment {
             vars.troveManagers[vars.i] = ITroveManager(troveManagerAddress);
         }
 
-        collateralRegistry = new CollateralRegistry(boldToken, vars.collaterals, vars.troveManagers);
+        collateralRegistry = CollateralRegistryTester(_deployCollateralRegistryWithProxy(
+            boldToken, 
+            vars.collaterals, 
+            vars.troveManagers, 
+            msg.sender
+        ));
         hintHelpers = new HintHelpers(collateralRegistry);
         multiTroveGetter = new MultiTroveGetter(collateralRegistry);
 
@@ -360,6 +368,42 @@ contract TestDeployer is MetadataDeployment {
         }
 
         boldToken.setCollateralRegistry(address(collateralRegistry));
+    }
+
+    
+    
+    // Helper function to deploy CollateralRegistry with proxy (if needed in future)
+    function _deployCollateralRegistryWithProxy(
+        IBoldToken _boldToken,
+        IERC20Metadata[] memory _tokens,
+        ITroveManager[] memory _troveManagers,
+        address _owner
+    ) internal returns (CollateralRegistryTester) {
+        // Deploy implementation
+        CollateralRegistryTester implementation = new CollateralRegistryTester();
+        
+        // Encode initialization data
+        bytes memory initData = abi.encodeWithSelector(
+            CollateralRegistry.initialize.selector,
+            _boldToken,
+            _tokens,
+            _troveManagers,
+            _owner
+        );
+
+        //TODO test only
+        address proxyAdmin = 0x70997970C51812dc3A010C7d01b50e0d17dc79C8; //Anvil 2nd account
+        
+        // Deploy proxy
+        TransparentUpgradeableProxy proxy = new TransparentUpgradeableProxy(
+            address(implementation),
+            proxyAdmin, // Never Use admin as owner
+            initData
+        );
+
+        console2.log("address of proxy", address(proxy));
+        
+        return CollateralRegistryTester(address(proxy));
     }
 
     function _deployAddressesRegistryDev(TroveManagerParams memory _troveManagerParams)
@@ -555,7 +599,7 @@ contract TestDeployer is MetadataDeployment {
         vars.troveManagers[2] = ITroveManager(troveManagerAddress);
 
         // Deploy registry and register the TMs
-        result.collateralRegistry = new CollateralRegistryTester(result.boldToken, vars.collaterals, vars.troveManagers);
+        result.collateralRegistry = _deployCollateralRegistryWithProxy(result.boldToken, vars.collaterals, vars.troveManagers, msg.sender);
 
         result.hintHelpers = new HintHelpers(result.collateralRegistry);
         result.multiTroveGetter = new MultiTroveGetter(result.collateralRegistry);
