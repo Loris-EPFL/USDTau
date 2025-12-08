@@ -1,0 +1,148 @@
+No files changed, compilation skipped
+Traces:
+  [66637145] → new DeployLiquity2Script@0x5b73C5498c1E3b4dbA84de0F1833c4a029d90519
+    └─ ← [Return] 330166 bytes of code
+
+  [33322612] DeployLiquity2Script::run()
+    ├─ [0] VM::envOr("SALT", "1765208544") [staticcall]
+    │   └─ ← [Return] <env var value>
+    ├─ [0] VM::envBytes("DEPLOYER") [staticcall]
+    │   └─ ← [Return] <env var value>
+    ├─ [0] VM::envAddress("DEPLOYER") [staticcall]
+    │   └─ ← [Return] <env var value>
+    ├─ [0] console::log("deployer qsd", 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::startBroadcast(0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266)
+    │   └─ ← [Return]
+    ├─ [0] console::log("deployer afret", 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::envOr("DEPLOYMENT_MODE", "complete") [staticcall]
+    │   └─ ← [Return] <env var value>
+    ├─ [0] VM::envOr("EPOCH_START", 1764603744 [1.764e9]) [staticcall]
+    │   └─ ← [Return] <env var value>
+    ├─ [0] console::log("Deployer:               0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Deployer balance:       10_000 ether") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Deployment mode:        complete") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("CREATE2 salt:           keccak256(bytes(\"1765208544\")) = 0x7ab295bb8ee0ff1add92b6faae869c4ccce3c210f18d93d4978d7ec2ad17df44") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Governance epoch start: 1764603744") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Use testnet PriceFeeds: no") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::computeCreate2Address(0x7ab295bb8ee0ff1add92b6faae869c4ccce3c210f18d93d4978d7ec2ad17df44, 0x1aa3e0afe0fe20a97ba03504a36ed56bddbdda9eacb0ddf1c3155f9052da718d) [staticcall]
+    │   └─ ← [Return] BoldToken: [0x0eEaC07bEc8876007fcaB1c48D8f44077CE94E11]
+    ├─ [1902875] Create2Deployer::create2()
+    │   ├─ [1866130] → new BoldToken@0x0eEaC07bEc8876007fcaB1c48D8f44077CE94E11
+    │   │   ├─ emit OwnershipTransferred(previousOwner: 0x0000000000000000000000000000000000000000, newOwner: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266)
+    │   │   └─ ← [Return] 8970 bytes of code
+    │   └─ ← [Return] 0x0eeac07bec8876007fcab1c48d8f44077ce94e11
+    ├─ [690397] → new AddressesRegistry@0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512
+    │   ├─ emit OwnershipTransferred(previousOwner: 0x0000000000000000000000000000000000000000, newOwner: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266)
+    │   └─ ← [Return] 3326 bytes of code
+    ├─ [0] VM::computeCreate2Address(0x7ab295bb8ee0ff1add92b6faae869c4ccce3c210f18d93d4978d7ec2ad17df44, 0xcfc917143452b37e5b982ba941e9bafe96d5e4fb765b76eed3319d9ef79992a2) [staticcall]
+    │   └─ ← [Return] 0xBCeC4D4aB816E0b7e9d2F8e5E77879E97E60e22F
+    ├─ [690397] → new AddressesRegistry@0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0
+    │   ├─ emit OwnershipTransferred(previousOwner: 0x0000000000000000000000000000000000000000, newOwner: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266)
+    │   └─ ← [Return] 3326 bytes of code
+    ├─ [0] VM::computeCreate2Address(0x7ab295bb8ee0ff1add92b6faae869c4ccce3c210f18d93d4978d7ec2ad17df44, 0x44754d815eed31515f20d1c4ef740e0db8cdeeb690869f49791930584fcc32e5) [staticcall]
+    │   └─ ← [Return] 0x97C9D2756f5F84Fee26524681Ab7CCf69455B5b0
+    ├─ [690397] → new AddressesRegistry@0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9
+    │   ├─ emit OwnershipTransferred(previousOwner: 0x0000000000000000000000000000000000000000, newOwner: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266)
+    │   └─ ← [Return] 3326 bytes of code
+    ├─ [0] VM::computeCreate2Address(0x7ab295bb8ee0ff1add92b6faae869c4ccce3c210f18d93d4978d7ec2ad17df44, 0xd21f036a047e6ddc0c14c03e73839ab4c03a9dc4e822ef22507458b1a6ec3788) [staticcall]
+    │   └─ ← [Return] 0xB71a1f916A099bB478B271deEc7e37D6D7c4157D
+    ├─ [1272017] → new CollateralRegistry@0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9
+    │   ├─ emit Initialized(version: 18446744073709551615 [1.844e19])
+    │   └─ ← [Return] 6236 bytes of code
+    ├─ [820161] → new TransparentUpgradeableProxy@0x5FC8d32690cc91D4c39d9d3abcBD16989F875707
+    │   ├─ emit Upgraded(implementation: CollateralRegistry: [0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9])
+    │   ├─ [297058] CollateralRegistry::initialize(BoldToken: [0x0eEaC07bEc8876007fcaB1c48D8f44077CE94E11], [0x9Dc08C6e2BF0F1eeD1E00670f80Df39145529F81, 0x31049849CCdD983D8F401077537438eaF12B12Af, 0x0Aea63F0f4A1DcC1d6641Bf393A0032c2C33f88B], [0xBCeC4D4aB816E0b7e9d2F8e5E77879E97E60e22F, 0x97C9D2756f5F84Fee26524681Ab7CCf69455B5b0, 0xB71a1f916A099bB478B271deEc7e37D6D7c4157D], 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266) [delegatecall]
+    │   │   ├─ emit OwnershipTransferred(previousOwner: 0x0000000000000000000000000000000000000000, newOwner: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266)
+    │   │   ├─ emit BaseRateUpdated(_baseRate: 1000000000000000000 [1e18])
+    │   │   ├─ emit Initialized(version: 1)
+    │   │   └─ ← [Stop]
+    │   ├─ [230399] → new ProxyAdmin@0x61c36a8d610163660E21a8b7359e1Cac0C9133e1
+    │   │   ├─ emit OwnershipTransferred(previousOwner: 0x0000000000000000000000000000000000000000, newOwner: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8)
+    │   │   └─ ← [Return] 1031 bytes of code
+    │   ├─ emit AdminChanged(previousAdmin: 0x0000000000000000000000000000000000000000, newAdmin: ProxyAdmin: [0x61c36a8d610163660E21a8b7359e1Cac0C9133e1])
+    │   └─ ← [Return] 1051 bytes of code
+    ├─ [1593819] → new HintHelpers@0x0165878A594ca255338adfa4d48449f69242Eb8F
+    │   └─ ← [Return] 7959 bytes of code
+    ├─ [903183] → new MultiTroveGetter@0xa513E6E4b8f2a923D98304ec87F64353C4D5C853
+    │   └─ ← [Return] 4510 bytes of code
+    ├─ [419871] → new DebtInFrontHelper@0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6
+    │   └─ ← [Return] 2095 bytes of code
+    ├─ [0] VM::computeCreate2Address(0x7ab295bb8ee0ff1add92b6faae869c4ccce3c210f18d93d4978d7ec2ad17df44, 0x5af8bab1402186b1c661288ca4cfd1d751658bd1030b695dd5b49cd8376ac198) [staticcall]
+    │   └─ ← [Return] 0x0dc78711f2d5A991d89f8414b74a67B03f2C5d53
+    ├─ [0] VM::projectRoot() [staticcall]
+    │   └─ ← [Return] "/home/Loris/USDTau/USDTauChainlink/USDTau/contracts"
+    ├─ [0] VM::readFile("/home/Loris/USDTau/USDTauChainlink/USDTau/contracts/utils/assets/bold_logo.txt") [staticcall]
+    │   └─ ← [Return] <file>
+    ├─ [0] VM::readFile("/home/Loris/USDTau/USDTauChainlink/USDTau/contracts/utils/assets/weth_logo.txt") [staticcall]
+    │   └─ ← [Return] <file>
+    ├─ [0] VM::readFile("/home/Loris/USDTau/USDTauChainlink/USDTau/contracts/utils/assets/wsteth_logo.txt") [staticcall]
+    │   └─ ← [Return] <file>
+    ├─ [0] VM::readFile("/home/Loris/USDTau/USDTauChainlink/USDTau/contracts/utils/assets/reth_logo.txt") [staticcall]
+    │   └─ ← [Return] <file>
+    ├─ [0] VM::readFile("/home/Loris/USDTau/USDTauChainlink/USDTau/contracts/utils/assets/geist.txt") [staticcall]
+    │   └─ ← [Return] <file>
+    ├─ [3871760] → new <unknown>@0x8A791620dd6260079BF849Dc5567aDC3F2FdC318
+    │   └─ ← [Return] 19337 bytes of code
+    ├─ [274712] Create2Deployer::create2()
+    │   ├─ [241670] → new FixedAssetReader@0xA73bEC9D2bdeBa2adCc362d209Dc82Fbe9895a46
+    │   │   └─ ← [Return] 627 bytes of code
+    │   └─ ← [Return] 0xa73bec9d2bdeba2adcc362d209dc82fbe9895a46
+    ├─ [4416562] Create2Deployer::create2()
+    │   ├─ [4373908] → new MetadataNFT@0x2De0D2B4E7F92a7c5a0927603aAb9B546311126A
+    │   │   └─ ← [Return] 21843 bytes of code
+    │   └─ ← [Return] 0x2de0d2b4e7f92a7c5a0927603aab9b546311126a
+    ├─ [0] VM::computeCreate2Address(0x7ab295bb8ee0ff1add92b6faae869c4ccce3c210f18d93d4978d7ec2ad17df44, 0x9f099c550dc4ff410c3ef204f4d61699803f9456f7b02f2e435b3a2adfe9a1be) [staticcall]
+    │   └─ ← [Return] MetadataNFT: [0x2De0D2B4E7F92a7c5a0927603aAb9B546311126A]
+    ├─ [0] VM::computeCreate2Address(0x7ab295bb8ee0ff1add92b6faae869c4ccce3c210f18d93d4978d7ec2ad17df44, 0x094e0de42ad50f5baea8c07e2f230e44d7ab06e778432552d00a4178ad0f34ef) [staticcall]
+    │   └─ ← [Return] 0x5752b23A21aaeE8E8b79E8e91Ab57829E1221AfB
+    ├─ [0] VM::computeCreate2Address(0x7ab295bb8ee0ff1add92b6faae869c4ccce3c210f18d93d4978d7ec2ad17df44, 0xf709ab3b2ade5b78961f038857b69b6cfaa2107de793367616df0598adb8e4df) [staticcall]
+    │   └─ ← [Return] 0x323590488D332A2EFaad63229C8929eA6E5d601b
+    ├─ [0] VM::computeCreate2Address(0x7ab295bb8ee0ff1add92b6faae869c4ccce3c210f18d93d4978d7ec2ad17df44, 0x8db43745f01151553b11cbd18fe9798590d27f909a722d99cc43d23b3b5262b6) [staticcall]
+    │   └─ ← [Return] 0xef4F444f49C2072fcc3e08A58ba864bC0C65bD76
+    ├─ [0] VM::computeCreate2Address(0x7ab295bb8ee0ff1add92b6faae869c4ccce3c210f18d93d4978d7ec2ad17df44, 0x9be2dab5fae924852e0d7b263ef504226b75295e32b356378604c3c2a453fee2) [staticcall]
+    │   └─ ← [Return] 0xCd3c5588D7398cD4C07c860D41223e402b3e4FE2
+    ├─ [0] VM::computeCreate2Address(0x7ab295bb8ee0ff1add92b6faae869c4ccce3c210f18d93d4978d7ec2ad17df44, 0x2c958bbd52511fd86fb959a63516966ecf99e64b77dda7e3f868da2f4b3796ec) [staticcall]
+    │   └─ ← [Return] 0xD086EE69cd99BB6f06ad202ef733c67BDC46157c
+    ├─ [0] VM::computeCreate2Address(0x7ab295bb8ee0ff1add92b6faae869c4ccce3c210f18d93d4978d7ec2ad17df44, 0xcc9488d7d729cab7a822b14c2a937e28e9fc5f902c4604297121de94776aeac9) [staticcall]
+    │   └─ ← [Return] 0x92A43e4C4a6738ddE2aBF43bC6972BCdDA7e838F
+    ├─ [0] VM::computeCreate2Address(0x7ab295bb8ee0ff1add92b6faae869c4ccce3c210f18d93d4978d7ec2ad17df44, 0xf293cee4e6fc0fe911816b5fdc521f98703e1ebebf63b08faa6ff9085d488e9b) [staticcall]
+    │   └─ ← [Return] 0x6F0D839DF000d4a5A2498b52Ab2ea365247De6cf
+    ├─ [0] VM::computeCreate2Address(0x7ab295bb8ee0ff1add92b6faae869c4ccce3c210f18d93d4978d7ec2ad17df44, 0x6df1c3ab8464a8574db09a275b0e33cd90b2c6902d9f8fe35cf77e0981846e18) [staticcall]
+    │   └─ ← [Return] 0xcdEf09fca790119F24789024A453F046A33F5F65
+    ├─ [0] console::log("deploying price feed") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("deploying price feeds", 964, true) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("deploying pyth price feeds") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("deploying weth price feed") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [27604] → new <unknown>@0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0
+    │   ├─ [0] 0x0000000000000000000000000000000000000000::decimals() [staticcall]
+    │   │   └─ ← [Stop]
+    │   └─ ← [Revert] 0x0000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000004763616c6c20746f206e6f6e2d636f6e747261637420616464726573732030783030303030303030303030303030303030303030303030303030303030303030303030303030303000000000000000000000000000000000000000000000000000
+    └─ ← [Revert] call to non-contract address 0x0000000000000000000000000000000000000000
+
+
+
+== Logs ==
+  deployer qsd 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+  deployer afret 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+  Deployer:               0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  Deployer balance:       10_000 ether
+  Deployment mode:        complete
+  CREATE2 salt:           keccak256(bytes("1765208544")) = 0x7ab295bb8ee0ff1add92b6faae869c4ccce3c210f18d93d4978d7ec2ad17df44
+  Governance epoch start: 1764603744
+  Use testnet PriceFeeds: no
+  deploying price feed
+  deploying price feeds 964 true
+  deploying pyth price feeds
+  deploying weth price feed

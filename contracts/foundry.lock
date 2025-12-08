@@ -1,4 +1,19 @@
 {
+  "contracts/lib/Solady": {
+    "rev": "362b2efd20f38aea7252b391e5e016633ff79641"
+  },
+  "contracts/lib/V2-gov": {
+    "rev": "b880481d701d2b07236f2e04842c79b4fe77e5fd"
+  },
+  "contracts/lib/forge-std": {
+    "rev": "726a6ee5fc8427a0013d6f624e486c9130c0e336"
+  },
+  "contracts/lib/openzeppelin-contracts": {
+    "rev": "bd325d56b4c62c9c5c1aff048c37c6bb18ac0290"
+  },
+  "contracts/lib/openzeppelin-contracts-upgradeable": {
+    "rev": "aa677e9d28ed78fc427ec47ba2baef2030c58e7c"
+  },
   "lib/Solady": {
     "rev": "362b2efd20f38aea7252b391e5e016633ff79641"
   },
@@ -15,6 +30,18 @@
     "tag": {
       "name": "v5.5.0",
       "rev": "aa677e9d28ed78fc427ec47ba2baef2030c58e7c"
+    }
+  },
+  "lib/v3-core": {
+    "tag": {
+      "name": "v1.0.0",
+      "rev": "e3589b192d0be27e100cd0daaf6c97204fdb1899"
+    }
+  },
+  "lib/v3-periphery": {
+    "tag": {
+      "name": "v1.3.0",
+      "rev": "80f26c86c57b8a5e4b913f42844d4c8bd274d058"
     }
   }
 }
